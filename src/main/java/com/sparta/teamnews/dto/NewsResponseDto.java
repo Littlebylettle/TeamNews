@@ -1,4 +1,4 @@
 package com.sparta.teamnews.dto;
 
-public class RequestDto {
+public class NewsResponseDto {
 }

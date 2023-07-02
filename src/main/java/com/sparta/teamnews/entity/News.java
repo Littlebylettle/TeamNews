@@ -1,7 +1,4 @@
 package com.sparta.teamnews.entity;
 
-
-public class User {
-
-
+public class News {
 }
