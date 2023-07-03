@@ -13,13 +13,22 @@ import java.util.List;
 @Table(name="user")  //DB제작시 추가
 @NoArgsConstructor  //기본 생성자
 public class User {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Column(name = "username", nullable = false)
     String username;
+
     @Column(name = "password", nullable = false)
     String password;
+
+    @Column(name = "profilename")
+    String profilename;
+
+    @Column(name = "introduce")
+    String introduce;
 
 
 }

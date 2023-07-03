@@ -18,10 +18,13 @@ public class Post extends Timestamped{ //news 게시글 Entity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;    //id
+
     @Column(name="title")
     String title;   //제목
+
     @Column(name = "image", nullable = false)
     String image;
+
     @Column(name ="content",nullable = false, length = 500)
     String content;//작성내용
 
