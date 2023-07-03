@@ -1,10 +1,10 @@
 package com.sparta.teamnews.repository;
 
-import com.sparta.teamnews.entity.User;
+import com.sparta.teamnews.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
-    //JPA쿼리 작성
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+
 }
