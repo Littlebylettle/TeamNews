@@ -20,11 +20,6 @@ public class User {
     String username;
     @Column(name = "password", nullable = false)
     String password;
-    @Column(name = "introduce")
-    String introduce;
-    @Column(name = "profilename")
-    String profilename;
-    //List<Post> posts  ??
-    //List<Comment> comments ??
+
 
 }

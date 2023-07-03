@@ -1,20 +1,29 @@
 package com.sparta.teamnews.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Cleanup;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
+@Table(name = "comments")
+@NoArgsConstructor
 public class Comment extends Timestamped{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;
     @Column(name = "comment")
     String comment;
-    @Column(name = "createAt")
-    String createAt;
-    @Column(name = "modifiedAt")
-    String modifiedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
