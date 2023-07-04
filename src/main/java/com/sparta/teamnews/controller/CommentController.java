@@ -1,6 +1,9 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.CommentRequestDto;
+import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.CommentService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,9 +15,9 @@ public class CommentController {
         this.commentService = commentService;
     }
     @PostMapping("/commet")         //댓글 작성
-    public String createComment(){
+    public String createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
-        return "/redirect:/";
+        return commentService.createComment(commentRequestDto, userDetails);
     }
     @PutMapping("/comment/{id}")            //댓글 수정
     public String updateComment(){

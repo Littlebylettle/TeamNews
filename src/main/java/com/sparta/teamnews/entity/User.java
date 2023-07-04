@@ -1,5 +1,6 @@
 package com.sparta.teamnews.entity;
 
+import com.sparta.teamnews.dto.UserResponseDto;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,5 +37,21 @@ public class User {
         this.password = password;
         this.introduce = introduce;
         this.profilename = profilename;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public void setProfilename(String profilename) {
+        this.profilename = profilename;
+    }
+
+    public void update(UserResponseDto userResponseDto) {
+        this.password = userResponseDto.getPassword();
     }
 }

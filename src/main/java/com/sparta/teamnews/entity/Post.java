@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity     //Entity클래스
 @Getter
-@Setter
 @Table(name="posts")  //DB제작시 추가
 @NoArgsConstructor  //기본 생성자
 public class Post extends Timestamped{ //news 게시글 Entity
@@ -22,7 +21,7 @@ public class Post extends Timestamped{ //news 게시글 Entity
   
     @Column(name="title")
     private String title;   //제목
-  
+
     @Column(name = "image", nullable = false)
     private String image;
   
@@ -42,4 +41,16 @@ public class Post extends Timestamped{ //news 게시글 Entity
         this.image = requestDto.getImage();
         this.user = user;
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
 }

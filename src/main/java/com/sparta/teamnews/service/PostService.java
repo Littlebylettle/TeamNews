@@ -48,7 +48,7 @@ public class PostService {
     }
 
 
-    private Post findPost(Long id) {
+    public Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글은 존재하지 않습니다."));
     }
