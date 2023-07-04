@@ -1,5 +1,6 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
 import com.sparta.teamnews.service.UserService;
@@ -17,7 +18,8 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")    //회원가입
-    public String signupUser() {
+    public String signupUser(@RequestBody SignupRequestDto signupRequestDto) {
+        userService.signup(signupRequestDto);
         return "회원가입 완료";
     }
 

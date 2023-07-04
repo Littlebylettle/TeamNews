@@ -13,14 +13,20 @@ import lombok.Setter;
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;
-    @Column(name = "username", nullable = false)
-    String username;
-     @Column(name = "password", nullable = false)
-    String password;
+    private Long id;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+    @Column(name = "password", nullable = false)
+    private String password;
     @Column(name = "introduce", nullable = false)
-    String introduce;
+    private String introduce;
     @Column(name = "profilename", nullable = false)
-    String profilename;
+    private String profilename;
 
+    public User(String username, String password, String introduce, String profilename) {
+        this.username = username;
+        this.password = password;
+        this.introduce = introduce;
+        this.profilename = profilename;
+    }
 }

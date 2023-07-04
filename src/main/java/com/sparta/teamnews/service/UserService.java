@@ -1,5 +1,6 @@
 package com.sparta.teamnews.service;
 
+import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
 import com.sparta.teamnews.entity.User;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -21,6 +24,30 @@ public class UserService {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public void signup(SignupRequestDto requestDto) {
+        String username = requestDto.getUsername();
+        String password = passwordEncoder.encode(requestDto.getPassword());
+        String profilename = requestDto.getProfilename();
+        String introduce = requestDto.getIntroduce();
+
+        // 회원 중복 확인
+        Optional<User> checkUsername = userRepository.findByUsername(username);
+        if (checkUsername.isPresent()) {
+            throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+        }
+
+        // email 중복확인
+//        String email = requestDto.getEmail();
+//        Optional<User> checkEmail = userRepository.findByEmail(email);
+//        if (checkEmail.isPresent()) {
+//            throw new IllegalArgumentException("중복된 Email 입니다.");
+//        }
+
+        // 사용자 등록
+        User user = new User(username, password, profilename, introduce);
+        userRepository.save(user);
     }
 
     public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
