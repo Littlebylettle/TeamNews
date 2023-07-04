@@ -1,5 +1,6 @@
 package com.sparta.teamnews.entity;
 
+import com.sparta.teamnews.dto.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,10 @@ public class Post extends Timestamped{ //news 게시글 Entity
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList = new ArrayList<>();
 
+    public Post(PostRequestDto requestDto, User user) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContents();
+        this.image = requestDto.getImage();
+        this.user = user;
+    }
 }
