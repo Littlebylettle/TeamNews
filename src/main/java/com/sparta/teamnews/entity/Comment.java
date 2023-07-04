@@ -1,11 +1,8 @@
 package com.sparta.teamnews.entity;
 
-import com.sparta.teamnews.dto.CommentRequestDto;
 import jakarta.persistence.*;
-import lombok.Cleanup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -29,7 +26,7 @@ public class Comment extends Timestamped{
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void setComment(String body) {
+    public void setBody(String body) {
         this.body = body;
     }
 
