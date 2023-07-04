@@ -1,12 +1,28 @@
 package com.sparta.teamnews.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sparta.teamnews.entity.User;
 import lombok.Getter;
 
 @Getter
-public class UserResponseDto
-{
-    String username;
-    String password;
-    String introduce;
-    String profilename;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserResponseDto {
+    private String username;
+    private String password;
+    private String introduce;
+    private String profilename;
+    private String msg;
+    private Integer statusCode;
+
+    // 프로필 수정 Response 용 생성자
+    public UserResponseDto(User user) {
+        this.profilename = user.getProfilename();
+        this.introduce = user.getIntroduce();
+    }
+
+    // 로그인 Response 용 생성자
+    public UserResponseDto(String msg, Integer statusCode) {
+        this.msg = msg;
+        this.statusCode = statusCode;
+    }
 }

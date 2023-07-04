@@ -12,6 +12,7 @@ public class PostResponseDto {
     private String title;
     private String profilename;
     private String content;
+    private Boolean success;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private List<CommentResponseDto> comment;
@@ -28,5 +29,7 @@ public class PostResponseDto {
                 .map(CommentResponseDto::new)
                 .toList();
 
+    public PostResponseDto(Boolean success) {
+        this.success = success;
     }
 }
