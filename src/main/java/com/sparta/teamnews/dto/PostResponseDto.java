@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 @Getter
 public class PostResponseDto {
 
-    String title;
-    String image;
-    String username;
-    String content;
+    private String title;
+    private String image;
+    private String username;
+    private String content;
     private Boolean success;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
