@@ -14,9 +14,9 @@ import lombok.Setter;
 public class Comment extends Timestamped{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;
+    private Long id;
     @Column(name = "comment")
-    String comment;
+    private String comment;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
