@@ -1,12 +1,15 @@
 package com.sparta.teamnews.service;
 
+import com.sparta.teamnews.dto.PostRequestDto;
 import com.sparta.teamnews.dto.PostResponseDto;
 import com.sparta.teamnews.entity.Post;
+import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 
 @Service
 public class PostService {
@@ -17,7 +20,6 @@ public class PostService {
 
 
     public List<PostResponseDto> getAllPost() {
-
         return postRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
                 .map(PostResponseDto::new)
@@ -31,15 +33,6 @@ public class PostService {
 
         return new PostResponseDto(post);
     }
-
-
-
-    private Post findPost(Long id) {
-        return postRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("선택한 게시물은 존재하지 않습니다.")
-        );
-    }
-}
 
     public PostResponseDto creatPost(PostRequestDto requestDto, User user) { //게시물 생성
 
@@ -72,7 +65,7 @@ public class PostService {
     }
 
 
-    private Post findPost(Long id) {
+    public Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글은 존재하지 않습니다."));
     }
