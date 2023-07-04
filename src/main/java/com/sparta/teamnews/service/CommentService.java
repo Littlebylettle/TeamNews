@@ -6,9 +6,9 @@ import com.sparta.teamnews.entity.Comment;
 import com.sparta.teamnews.entity.Post;
 import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.repository.CommentRepository;
-import com.sparta.teamnews.repository.UserRepository;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.RejectedExecutionException;
 
@@ -35,6 +35,7 @@ public class CommentService
     }
 
 
+
     public void deleteComment(Long id, User user) {
 
         Comment comment = findComment(id);
@@ -46,9 +47,21 @@ public class CommentService
         commentRepository.delete(comment);
     }
 
-    private Comment findComment(Long id) {
-        return commentRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("선택한 댓글은 존재하지 않습니다.")
-        );
+ 
+
+    @Transactional
+    public void updateComment(Long id,String body, UserDetailsImpl userDetails) {
+        Comment comment = findComment(id);
+        if(userDetails.getUsername().equals(comment.getUser().getUsername())){
+            comment.setBody(body);
+        }
+        else{
+            throw new IllegalArgumentException("직접쓴 글이 아니면 수정할 수 없습니다.");
+        }
+    }
+    public Comment findComment(Long id) {
+        return commentRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 댓글은 존재하지 않습니다."));
+
     }
 }
