@@ -32,7 +32,7 @@ public class PostService {
         }
         post.setTitle(requestDto.getTitle());
         post.setImage(requestDto.getImage());
-        post.setContent(requestDto.getContents());
+        post.setContent(requestDto.getContent());
 
         return new PostResponseDto(post);
 

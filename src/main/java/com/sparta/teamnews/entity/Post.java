@@ -38,7 +38,7 @@ public class Post extends Timestamped{ //news 게시글 Entity
 
     public Post(PostRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();
-        this.content = requestDto.getContents();
+        this.content = requestDto.getContent();
         this.image = requestDto.getImage();
         this.user = user;
     }
