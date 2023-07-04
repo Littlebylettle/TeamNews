@@ -15,18 +15,18 @@ import java.util.List;
 @NoArgsConstructor  //기본 생성자
 public class Post extends Timestamped{ //news 게시글 Entity
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;    //id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;    //id
+  
     @Column(name="title")
-    String title;   //제목
-
+    private String title;   //제목
+  
     @Column(name = "image", nullable = false)
-    String image;
-
+    private String image;
+  
     @Column(name ="content",nullable = false, length = 500)
-    String content;//작성내용
+    private String content;//작성내용
 
     @ManyToOne
     @JoinColumn(name = "user_id")
