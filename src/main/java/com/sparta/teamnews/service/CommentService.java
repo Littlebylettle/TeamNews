@@ -4,10 +4,13 @@ import com.sparta.teamnews.dto.CommentRequestDto;
 import com.sparta.teamnews.dto.CommentResponseDto;
 import com.sparta.teamnews.entity.Comment;
 import com.sparta.teamnews.entity.Post;
+import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.repository.CommentRepository;
 import com.sparta.teamnews.repository.UserRepository;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.RejectedExecutionException;
 
 @Service
 public class CommentService
@@ -29,5 +32,23 @@ public class CommentService
         CommentResponseDto commentResponseDto = new CommentResponseDto(comment);
 
         return commentResponseDto;
+    }
+
+
+    public void deleteComment(Long id, User user) {
+
+        Comment comment = findComment(id);
+
+        if (!comment.getUser().equals(user)) {
+            throw new RejectedExecutionException();
+        }
+
+        commentRepository.delete(comment);
+    }
+
+    private Comment findComment(Long id) {
+        return commentRepository.findById(id).orElseThrow(()->
+                new IllegalArgumentException("선택한 댓글은 존재하지 않습니다.")
+        );
     }
 }
