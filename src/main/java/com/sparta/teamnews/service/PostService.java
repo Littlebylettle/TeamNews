@@ -18,6 +18,7 @@ public class PostService {
     }
 
     public PostResponseDto creatPost(PostRequestDto requestDto, User user) { //게시물 생성
+
         Post post = postRepository.save(new Post(requestDto, user));
         return new PostResponseDto(post);
     }
