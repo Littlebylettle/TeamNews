@@ -17,18 +17,14 @@ public class PostController {
     public PostController(PostService postService) {
         this.postService = postService;
     }
-
     @GetMapping("/post")// 전체 게시글 조회
-    public List<PostResponseDto> getAllNews() {
-        //service이용해서 내부 메소드 실행하기
-        return null;
+    public List<PostResponseDto> getAllPost(){
+        return postService.getAllPost();
     }
 
     @GetMapping("/post/{id}")       //게시글 단건 조회
-    public PostResponseDto getNews() {
-        //댓글정보까지 같이 받아서 뿌려줘야할듯 함...
-
-        return null;
+    public PostResponseDto getPost(@PathVariable Long id){
+        return postService.getPost(id);
     }
 
     @PostMapping("/post")    // 게시글 생성
