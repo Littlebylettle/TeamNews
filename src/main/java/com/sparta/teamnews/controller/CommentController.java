@@ -14,10 +14,10 @@ public class CommentController {
     public CommentController(CommentService commentService){
         this.commentService = commentService;
     }
-    @PostMapping("/commet")         //댓글 작성
+    @PostMapping("/comment")         //댓글 작성
     public String createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-
-        return commentService.createComment(commentRequestDto, userDetails);
+        commentService.createComment(commentRequestDto, userDetails);
+        return "/redirect:/api/post/1";
     }
     @PutMapping("/comment/{id}")            //댓글 수정
     public String updateComment(){

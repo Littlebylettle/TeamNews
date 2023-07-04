@@ -1,6 +1,7 @@
 package com.sparta.teamnews.service;
 
 import com.sparta.teamnews.dto.CommentRequestDto;
+import com.sparta.teamnews.dto.CommentResponseDto;
 import com.sparta.teamnews.entity.Comment;
 import com.sparta.teamnews.entity.Post;
 import com.sparta.teamnews.repository.CommentRepository;
@@ -19,17 +20,14 @@ public class CommentService
 
     }
 
-    public String createComment(CommentRequestDto commentRequestDto, UserDetailsImpl userDetails) {
-        //jwt검사진행
+    public CommentResponseDto createComment(CommentRequestDto commentRequestDto, UserDetailsImpl userDetails) {
 
         Post post = postService.findPost(commentRequestDto.getPostId());
-
-        commentRequestDto.setPost(post);
-        commentRequestDto.setUser(userDetails.getUser());
-        Comment comment = new Comment(commentRequestDto);
+        Comment comment = new Comment(commentRequestDto.getBody(),post,userDetails.getUser());
 
         commentRepository.save(comment);
+        CommentResponseDto commentResponseDto = new CommentResponseDto(comment);
 
-        return "/redirect:/api/post/1";
+        return commentResponseDto;
     }
 }

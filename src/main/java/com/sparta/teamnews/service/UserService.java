@@ -54,20 +54,18 @@ public class UserService {
     }
     @Transactional
     public UserResponseDto updatePassword(PwdRequestDto pwdRequestDto, UserDetailsImpl userDetails) { //확일할 패스워드와 유저정보 같이 받아옴
-        //로그인 되어있는지 확인하는 if문 추가 JWT확인
-        String password = passwordEncoder.encode(pwdRequestDto.getPassword());//패스워드 인코딩
+        String password = pwdRequestDto.getPassword();
         String modifyPassword = passwordEncoder.encode(pwdRequestDto.getModifyPassword());//패스워드 인코딩
-        if(password.equals(userDetails.getPassword())){ //입력한 패스워드와 유저의 패스워드가 맞는지 확인
-            User user = findUser(userDetails.getId());  //id를 이용해 user찾기
-            user.setPassword(modifyPassword);
-            UserResponseDto userResponseDto = new UserResponseDto(user);
-            //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
-
-            return userResponseDto;             //Dto 리턴
+        if(!passwordEncoder.matches(password,userDetails.getPassword())){ //입력한 패스워드와 유저의 패스워드가 맞는지 확인
+            throw new IllegalArgumentException("수정확인을 위해 필요한 비밀번호가 틀립니다.");
         }
 
-        throw new IllegalArgumentException("수정확인을 위해 필요한 비밀번호가 틀립니다.");
-        //여기까지 로그인 확인
+        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
+        user.setPassword(modifyPassword);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
+
+        return userResponseDto;             //Dto 리턴
     }
     public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
         String username = userRequestDto.getUsername();
