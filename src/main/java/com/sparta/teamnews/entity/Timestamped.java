@@ -16,7 +16,7 @@ public abstract class Timestamped {
     @CreatedDate
     @Column(updatable = false) //최초 생성시간만 초기화 되고 그 뒤 수정될 수 없음
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate //변경될 때마다 시간 저장
     @Column
