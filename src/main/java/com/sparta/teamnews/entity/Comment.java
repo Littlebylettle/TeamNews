@@ -1,5 +1,6 @@
 package com.sparta.teamnews.entity;
 
+import com.sparta.teamnews.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Cleanup;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "comments")
 @NoArgsConstructor
 public class Comment extends Timestamped{
@@ -18,8 +18,8 @@ public class Comment extends Timestamped{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "body")
+    private String body;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
@@ -29,4 +29,14 @@ public class Comment extends Timestamped{
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void setComment(String body) {
+        this.body = body;
+    }
+
+    public Comment(String body, Post post, User user) {
+        this.body = body;
+        this.post = post;
+        this.user = user;
+
+    }
 }

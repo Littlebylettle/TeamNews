@@ -1,16 +1,19 @@
 package com.sparta.teamnews.service;
 
+import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
 import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.jwt.JwtUtil;
 import com.sparta.teamnews.repository.UserRepository;
+import com.sparta.teamnews.security.UserDetailsImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -49,7 +52,21 @@ public class UserService {
         User user = new User(username, password, profilename, introduce);
         userRepository.save(user);
     }
+    @Transactional
+    public UserResponseDto updatePassword(PwdRequestDto pwdRequestDto, UserDetailsImpl userDetails) { //확일할 패스워드와 유저정보 같이 받아옴
+        String password = pwdRequestDto.getPassword();
+        String modifyPassword = passwordEncoder.encode(pwdRequestDto.getModifyPassword());//패스워드 인코딩
+        if(!passwordEncoder.matches(password,userDetails.getPassword())){ //입력한 패스워드와 유저의 패스워드가 맞는지 확인
+            throw new IllegalArgumentException("수정확인을 위해 필요한 비밀번호가 틀립니다.");
+        }
 
+        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
+        user.setPassword(modifyPassword);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
+
+        return userResponseDto;             //Dto 리턴
+    }
     public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
         String username = userRequestDto.getUsername();
         String password = userRequestDto.getPassword();
@@ -79,6 +96,11 @@ public class UserService {
     public User findUser(String username) {
         return userRepository.findByUsername(username).orElseThrow(() ->
                 new IllegalArgumentException("해당 username 이 존재하지 않습니다.")
+        );
+    }
+    public User findUser(Long id) {
+        return userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 id값이 존재하지 않습니다.")
         );
     }
 }
