@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class) //자동으로 시간을 넣어주는 기능이 수행된다.
 public abstract class Timestamped {
+
     @CreatedDate
     @Column(updatable = false) //최초 생성시간만 초기화 되고 그 뒤 수정될 수 없음
     @Temporal(TemporalType.TIMESTAMP)

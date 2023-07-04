@@ -9,6 +9,7 @@ import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
     User user;
+
     public UserDetailsImpl(User user){
         this.user = user;
     }

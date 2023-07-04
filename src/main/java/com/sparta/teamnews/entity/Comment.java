@@ -12,11 +12,14 @@ import lombok.Setter;
 @Table(name = "comments")
 @NoArgsConstructor
 public class Comment extends Timestamped{
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     @Id
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "comment")
-    String comment;
+    private String comment;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
