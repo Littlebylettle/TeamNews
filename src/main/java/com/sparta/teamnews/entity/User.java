@@ -1,6 +1,7 @@
 package com.sparta.teamnews.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "user")  //DB제작시 추가
 @NoArgsConstructor  //기본 생성자
+@EqualsAndHashCode
 public class User {
 
     @Id

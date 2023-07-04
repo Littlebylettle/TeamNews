@@ -10,10 +10,13 @@ import java.util.Collection;
 public class UserDetailsImpl implements UserDetails {
     User user;
 
-    public UserDetailsImpl(User user) {
+    public UserDetailsImpl(User user){
         this.user = user;
     }
 
+    public User getUser() {
+        return this.user;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>();
