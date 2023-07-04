@@ -61,7 +61,6 @@ public class UserService {
             User user = findUser(userDetails.getId());  //id를 이용해 user찾기
             user.setPassword(modifyPassword);
             UserResponseDto userResponseDto = new UserResponseDto(user);
-            user.update(userResponseDto);           //해당Dto대로 user 업데이트
             //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
 
             return userResponseDto;             //Dto 리턴

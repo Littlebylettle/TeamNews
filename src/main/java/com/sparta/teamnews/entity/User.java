@@ -51,7 +51,4 @@ public class User {
         this.profilename = profilename;
     }
 
-    public void update(UserResponseDto userResponseDto) {
-        this.password = userResponseDto.getPassword();
-    }
 }

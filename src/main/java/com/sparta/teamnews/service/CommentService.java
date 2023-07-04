@@ -23,6 +23,7 @@ public class CommentService
         //jwt검사진행
 
         Post post = postService.findPost(commentRequestDto.getPostId());
+
         commentRequestDto.setPost(post);
         commentRequestDto.setUser(userDetails.getUser());
         Comment comment = new Comment(commentRequestDto);
