@@ -18,6 +18,7 @@ public class UserResponseDto {
     public UserResponseDto(User user) {
         this.profilename = user.getProfilename();
         this.introduce = user.getIntroduce();
+        this.password = user.getPassword();
     }
 
     // 로그인 Response 용 생성자

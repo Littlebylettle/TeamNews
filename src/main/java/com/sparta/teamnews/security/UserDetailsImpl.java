@@ -17,6 +17,9 @@ public class UserDetailsImpl implements UserDetails {
     public User getUser() {
         return this.user;
     }
+    public Long getId(){
+        return this.user.getId();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>();

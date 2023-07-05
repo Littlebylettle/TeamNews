@@ -1,11 +1,14 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
+import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,8 +43,9 @@ public class UserController {
     }
 
     @PutMapping("/profile/password")        //비밀번호 수정
-    public UserResponseDto updatePassword() {
+    public UserResponseDto updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return null;
+
+        return userService.updatePassword(pwdRequestDto,userDetails);
     }
 }
