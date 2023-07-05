@@ -36,15 +36,13 @@ public class UserController {
         return userService.logoutUser(request);
     }
 
-    @PutMapping("/profile/{id}")        //프로필정보 수정
-    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    @PutMapping("/profile")     //프로필정보 수정
+    public UserResponseDto updateProfile(@RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return userService.updateProfile(profileRequestDto, userDetails);
     }
 
     @PutMapping("/profile/password")        //비밀번호 수정
     public UserResponseDto updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-
         return userService.updatePassword(pwdRequestDto,userDetails);
     }
 }
