@@ -2,16 +2,16 @@ package com.sparta.teamnews.controller;
 
 import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
-import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/api")
@@ -28,10 +28,10 @@ public class UserController {
         return "redirect:/api/user/login-page";
     }
 
-    @PostMapping("/user/login")     //로그인
-    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
-        return userService.loginUser(userRequestDto, response);
-    }
+//    @PostMapping("/user/login")     //로그인
+//    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
+//        return userService.loginUser(userRequestDto, response);
+//    }
 
     @PostMapping("/user/logout")    //로그아웃
     public UserResponseDto logoutUser(HttpServletRequest request) {

@@ -67,23 +67,24 @@ public class UserService {
 
         return userResponseDto;             //Dto 리턴
     }
-    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
-        String username = userRequestDto.getUsername();
-        String password = userRequestDto.getPassword();
 
-        User user = findUser(username);
-
-        // password 체크
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new IllegalArgumentException("password 오류입니다.");
-        }
-
-        // JWT 생성 및 헤더에 추가
-        String token = jwtUtil.createToken(username);
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
-
-        return new UserResponseDto("로그인 성공", HttpStatus.OK.value());
-    }
+//    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
+//        String username = userRequestDto.getUsername();
+//        String password = userRequestDto.getPassword();
+//
+//        User user = findUser(username);
+//
+//        // password 체크
+//        if (!passwordEncoder.matches(password, user.getPassword())) {
+//            throw new IllegalArgumentException("password 오류입니다.");
+//        }
+//
+//        // JWT 생성 및 헤더에 추가
+//        String token = jwtUtil.createToken(username);
+//        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+//
+//        return new UserResponseDto("로그인 성공", HttpStatus.OK.value());
+//    }
 
     public UserResponseDto logoutUser(HttpServletRequest request) {
         // Redis 연동 후
