@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping("/user/signup")    //회원가입
     public String signupUser(SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
-        return "redirect:/api/user/login-page";
+        return "redirect:/api/user/login";
     }
 
 //    @PostMapping("/user/login")     //로그인

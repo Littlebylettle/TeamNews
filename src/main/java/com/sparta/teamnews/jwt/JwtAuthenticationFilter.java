@@ -18,6 +18,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final JwtUtil jwtUtil;
 
+
     public JwtAuthenticationFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
         setFilterProcessesUrl("/api/user/login");
@@ -59,4 +60,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 여기서 status만 설정하는 것이 아니라
         // response 객체, content-type 그리고 메세지 등을 담아서 보낼 수도 있음
     }
+
+
 }
