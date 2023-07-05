@@ -42,7 +42,7 @@
     const host = 'http://' + window.location.host;
 
     const href = location.href;
-    const queryString = href.substring(href.indexOf("?")+1)
+    const queryString = href.substring(href.indexOf("?") + 1)
     if (queryString === 'error') {
         const errorDiv = document.getElementById('login-failed');
         errorDiv.style.display = 'block';
@@ -59,6 +59,14 @@
             data: JSON.stringify({username: username, password: password}),
         })
             .done(function (res, status, xhr) {
+                const token = xhr.getResponseHeader('Authorization');
+
+                Cookies.set('Authorization', token, {path: '/'})
+
+                $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+                    jqXHR.setRequestHeader('Authorization', token);
+                });
+
                 window.location.href = host;
             })
             .fail(function (xhr, textStatus, errorThrown) {

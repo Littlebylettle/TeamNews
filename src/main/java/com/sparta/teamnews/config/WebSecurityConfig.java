@@ -1,5 +1,6 @@
 package com.sparta.teamnews.config;
 
+import com.sparta.teamnews.jwt.JwtAuthenticationFilter;
 import com.sparta.teamnews.jwt.JwtAuthorizationFilter;
 import com.sparta.teamnews.jwt.JwtUtil;
 import com.sparta.teamnews.security.UserDetailsServiceImpl;
@@ -42,6 +43,13 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil);
+        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
+        return filter;
+    }
+
+    @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
         return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
     }
@@ -65,8 +73,16 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
+        http.formLogin((formLogin) ->
+                formLogin
+                        .loginPage("/api/user/login-page").permitAll()
+        );
+
+
         // 필터 관리
-        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
