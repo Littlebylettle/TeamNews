@@ -1,9 +1,6 @@
 package com.sparta.teamnews.service;
 
-import com.sparta.teamnews.dto.PwdRequestDto;
-import com.sparta.teamnews.dto.SignupRequestDto;
-import com.sparta.teamnews.dto.UserRequestDto;
-import com.sparta.teamnews.dto.UserResponseDto;
+import com.sparta.teamnews.dto.*;
 import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.jwt.JwtUtil;
 import com.sparta.teamnews.repository.UserRepository;
@@ -65,6 +62,17 @@ public class UserService {
         UserResponseDto userResponseDto = new UserResponseDto(user);
         //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
 
+        return userResponseDto;             //Dto 리턴
+    }
+    @Transactional
+    public UserResponseDto updateProfile(ProfileRequestDto profileRequestDto, UserDetailsImpl userDetails) {
+        String modifyprofilename = profileRequestDto.getModifyprofilename();
+        String modifyintroduce = profileRequestDto.getModifyintroduce();
+
+        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
+        user.setProfilename(modifyprofilename);
+        user.setIntroduce(modifyintroduce);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
         return userResponseDto;             //Dto 리턴
     }
 

@@ -18,24 +18,27 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+  
     @Column(name = "username", nullable = false, unique = true)
     private String username;
-
+  
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "profilename", nullable = false)
+    private String profilename;
 
     @Column(name = "introduce", nullable = false)
     private String introduce;
 
-    @Column(name = "profilename", nullable = false)
-    private String profilename;
+
 
     public User(String username, String password, String profilename, String introduce) {
         this.username = username;
         this.password = password;
         this.profilename = profilename;
         this.introduce = introduce;
+
     }
 
     public void setPassword(String password) {
