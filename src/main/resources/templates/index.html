@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -22,43 +21,18 @@
     <script src="/js/basic.js"></script>
     <title>TodayOutfit</title>
 </head>
-
 <body>
 <div class="header" style="position:fixed;">
-
     <!-- 로그인 후 화면 -->
     <div id="login-true" style="display: none">
         <div id="header-title-select-shop">
             Today Outfit
         </div>
-        <a id="login-text" href="javascript:logout()">
-            Logout
-        </a>
-    </div>
-    <!-- 로그인 후 화면 -->
-
-    <!-- 로그인 전 화면 -->
-    <div id="login-false">
-        <div id="header-title-select-shop">
-            Today Outfit
-        </div>
-
-        <a id="sign-text" href="/api/user/signup">
-            SIGN UP
-        </a>
-
-        <a id="login-text" href="/api/user/login-page">
-            LOGIN
-        </a>
-
         <div class="postbox">
             <a id="new-text" href="">
                 New Post
             </a>
-
         </div>
-
-
         <!-- 게시글-->
         <div class="cards">
             <div id="cards" class="row row-cols-1 row-cols-md-5 g-5">
@@ -69,7 +43,6 @@
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
                         </div>
-
                     </div>
                 </div>
                 <div class="col">
@@ -79,10 +52,8 @@
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col">
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
@@ -90,10 +61,8 @@
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col">
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
@@ -101,10 +70,8 @@
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col">
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
@@ -112,18 +79,79 @@
                         <div class="card-body">
                             <h5 class="card-title">Profilename</h5>
                         </div>
-
                     </div>
                 </div>
-
+            </div>
+        </div>
+        <a id="login-text" href="javascript:logout()">
+            Logout
+        </a>
+    </div>
+    <!-- 로그인 후 화면 -->
+    <!-- 로그인 전 화면 -->
+    <div id="login-false">
+        <div id="header-title-select-shop">
+            Today Outfit
+        </div>
+        <a id="sign-text" href="/api/user/signup">
+            SIGN UP
+        </a>
+        <a id="login-text" href="/api/user/login-page">
+            LOGIN
+        </a>
+        <!-- 게시글-->
+        <div class="cards">
+            <div id="cards" class="row row-cols-1 row-cols-md-5 g-5">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">profilename</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">profilename</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">profilename</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">profilename</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Profilename</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- 게시글-->
-
     </div>
     <!-- 로그인 전 화면 -->
 </div>
-
 </body>
-
 </html>
