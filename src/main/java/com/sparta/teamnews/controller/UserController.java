@@ -1,9 +1,6 @@
 package com.sparta.teamnews.controller;
 
-import com.sparta.teamnews.dto.PwdRequestDto;
-import com.sparta.teamnews.dto.SignupRequestDto;
-import com.sparta.teamnews.dto.UserRequestDto;
-import com.sparta.teamnews.dto.UserResponseDto;
+import com.sparta.teamnews.dto.*;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,16 +33,13 @@ public class UserController {
         return userService.logoutUser(request);
     }
 
-    @PutMapping("/profile")        //프로필정보 수정
-    public UserResponseDto updateProfile() {
-
-        return null;
+    @PutMapping("/profile/{id}")        //프로필정보 수정
+    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.updateProfile(profileRequestDto, userDetails);
     }
 
     @PutMapping("/profile/password")        //비밀번호 수정
     public UserResponseDto updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-
         return userService.updatePassword(pwdRequestDto,userDetails);
     }
 }
