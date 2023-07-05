@@ -8,10 +8,12 @@ import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
@@ -21,13 +23,13 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")    //회원가입
-    public String signupUser(@RequestBody SignupRequestDto signupRequestDto) {
+    public String signupUser(SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
-        return "회원가입 완료";
+        return "redirect:/api/user/login-page";
     }
 
     @PostMapping("/user/login")     //로그인
-    public UserResponseDto loginUser(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
+    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
         return userService.loginUser(userRequestDto, response);
     }
 

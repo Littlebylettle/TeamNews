@@ -12,6 +12,9 @@ $(document).ready(function () {
             window.location.href = host + "/login.html";
         });
 
+        // 회원가입 버튼 클릭시 signup.html로 이동
+
+
         $('#login-false').show();
     } else {
         $('#login-true').show();
