@@ -87,7 +87,7 @@ body {
     text-decoration: underline;
 }
 
-#login-text {
+.loginAndLogout {
     position: absolute;
     top: 30px;
     right: 30px;

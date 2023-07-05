@@ -12,18 +12,18 @@ $(document).ready(function () {
         });
 
         // 회원가입 버튼 클릭시 signup.html로 이동
-        $('#login-true').hide();
-        $('#login-false').show();
+        $('#login-text').show();
+        $('#sign-text').show();
     } else {
-        $('#login-true').show();
-        $('#login-false').hide();
+        $('#logout-text').show();
+        $('.postbox').show();
     }
 })
 
 function logout() {
     // 토큰 삭제
     Cookies.remove('Authorization', {path: '/'});
-    window.location.href = host + "/api/user/login-page";
+    window.location.href = host + "/";
 }
 
 function getToken() {
