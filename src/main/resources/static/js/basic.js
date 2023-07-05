@@ -13,9 +13,10 @@ $(document).ready(function () {
 
         // 회원가입 버튼 클릭시 signup.html로 이동
         $('#login-text').show();
-        $('#sign-text').show();
+        $('#signup-text').show();
     } else {
         $('#logout-text').show();
+        $('#mypage-text').show();
         $('.postbox').show();
     }
 })
