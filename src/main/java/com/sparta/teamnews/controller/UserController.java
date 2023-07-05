@@ -1,5 +1,6 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.ProfileRequestDto;
 import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
@@ -8,10 +9,7 @@ import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api")
@@ -38,10 +36,9 @@ public class UserController {
         return userService.logoutUser(request);
     }
 
-    @PutMapping("/profile")        //프로필정보 수정
-    public UserResponseDto updateProfile() {
-
-        return null;
+    @PutMapping("/profile/{id}")        //프로필정보 수정
+    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.updateProfile(profileRequestDto, userDetails);
     }
 
     @PutMapping("/profile/password")        //비밀번호 수정
