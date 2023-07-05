@@ -29,8 +29,10 @@ public class UserController {
     }
 
     @PostMapping("/user/login")     //로그인
-    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
-        return userService.loginUser(userRequestDto, response);
+    public String loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
+        System.out.println(userRequestDto.getUsername());
+        userService.loginUser(userRequestDto, response);
+        return "redirect:/";
     }
 
     @PostMapping("/user/logout")    //로그아웃
