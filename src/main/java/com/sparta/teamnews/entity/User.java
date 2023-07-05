@@ -30,7 +30,7 @@ public class User {
 
     @Column(name = "introduce", nullable = false)
     private String introduce;
-  
+
 
 
     public User(String username, String password, String profilename, String introduce) {
