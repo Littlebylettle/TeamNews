@@ -13,4 +13,10 @@ public class HomeController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/api/user/login-page")
+    public String loginPage() { return "login";}
+
+    @GetMapping("/api/user/signup")
+    public String signupPage() { return "signup";}
 }

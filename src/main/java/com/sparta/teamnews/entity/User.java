@@ -24,19 +24,21 @@ public class User {
   
     @Column(name = "password", nullable = false)
     private String password;
-  
-    @Column(name = "introduce", nullable = false)
-    private String introduce;
-  
+
     @Column(name = "profilename", nullable = false)
     private String profilename;
 
+    @Column(name = "introduce", nullable = false)
+    private String introduce;
+  
 
-    public User(String username, String password, String introduce, String profilename) {
+
+    public User(String username, String password, String profilename, String introduce) {
         this.username = username;
         this.password = password;
-        this.introduce = introduce;
         this.profilename = profilename;
+        this.introduce = introduce;
+
     }
 
     public void setPassword(String password) {

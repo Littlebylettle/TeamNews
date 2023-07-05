@@ -7,26 +7,100 @@ body {
 }
 
 .header {
-    height: 255px;
-    box-sizing: border-box;
-    background-color: #15aabf;
-    color: white;
-    text-align: center;
-    padding-top: 80px;
-    /*padding: 50px;*/
-    font-size: 45px;
-    font-weight: bold;
-}
-
-#header-title-login-user {
-    font-size: 36px;
-    letter-spacing: -1.08px;
+    position: fixed;
+    top: 0px;
+    background-color: white;
+    width: auto;
+    height: 150px;
+    display: flex;
+    margin: 0px;
+    z-index: 30;
+    border-bottom: #121212;
 }
 
 #header-title-select-shop {
-    margin-top: 20px;
-    font-size: 45px;
+    color: #252525;
+    margin-top: 30px;
+    font-size: 50px;
+    margin-left: 30px;
     letter-spacing: 1.1px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.postbox {
+    margin-right: 30px;
+    position: absolute;
+    right: 0px;
+    top: 150px;
+}
+
+/* 게시글 */
+.cards {
+    width: auto;
+    margin-top: 70px;
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+.card.h-100 {
+    border: 5px solid #252525; /* 테두리 두께와 색상 설정 */
+}
+
+.card-body {
+    background-color: #252525;
+    color: white;
+    font-family: SpoqaHanSansNeo;
+}
+
+/* 게시글 */
+#new-text {
+    top: 48px;
+    right: 30px;
+    font-size: 25px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+}
+
+#sign-text {
+    position: absolute;
+    top: 30px;
+    right: 130px;
+    font-size: 25px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+}
+
+#login-text {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 25px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
 }
 
 #login-form {
@@ -41,7 +115,7 @@ body {
     padding: 56px 0 0;
     border-radius: 10px;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.15);
-    background-color: #ffffff;
+    background-color: #FFFFFF;
 }
 
 #login-title {
@@ -74,8 +148,7 @@ body {
     /*margin: 0 0 8px;*/
     padding: 11px 12px;
     border-radius: 5px;
-    background-color: #ffd43b;
-
+    background-color: #FFD43B;
     font-family: SpoqaHanSansNeo;
     font-size: 20px;
     font-weight: bold;
@@ -97,8 +170,7 @@ body {
     padding: 11px 12px;
     border-radius: 5px;
     border: solid 1px #212529;
-    background-color: #ffffff;
-
+    background-color: #FFFFFF;
     font-family: SpoqaHanSansNeo;
     font-size: 20px;
     font-weight: bold;
@@ -114,7 +186,7 @@ body {
     height: 52px;
     margin: 14px 0 0;
     border-radius: 5px;
-    background-color: #e9ecef;
+    background-color: #E9ECEF;
 }
 
 .login-id-label {
@@ -148,7 +220,7 @@ body {
     margin: 40px 0 0;
     padding: 11px 12px;
     border-radius: 5px;
-    background-color: #15aabf;
+    background-color: #252525;
 
     font-family: SpoqaHanSansNeo;
     font-size: 20px;
@@ -158,45 +230,13 @@ body {
     line-height: 1;
     letter-spacing: normal;
     text-align: center;
-    color: #ffffff;
-}
-
-#sign-text {
-    position:absolute;
-    top:48px;
-    right:110px;
-    font-size: 18px;
-    font-family: SpoqaHanSansNeo;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: 0.36px;
-    text-align: center;
-    color: #ffffff;
-}
-
-#login-text {
-    position:absolute;
-    top:48px;
-    right:50px;
-    font-size: 18px;
-    font-family: SpoqaHanSansNeo;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: 0.36px;
-    text-align: center;
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 .alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+    color: #721C24;
+    background-color: #F8D7DA;
+    border-color: #F5C6CB;
 }
 
 .alert {

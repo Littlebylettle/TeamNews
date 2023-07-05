@@ -1,17 +1,17 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.ProfileRequestDto;
 import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
-import com.sparta.teamnews.dto.UserRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
@@ -21,25 +21,24 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")    //회원가입
-    public String signupUser(@RequestBody SignupRequestDto signupRequestDto) {
+    public String signupUser(SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
-        return "회원가입 완료";
+        return "redirect:/api/user/login-page";
     }
 
-    @PostMapping("/user/login")     //로그인
-    public UserResponseDto loginUser(@RequestBody UserRequestDto userRequestDto, HttpServletResponse response) {
-        return userService.loginUser(userRequestDto, response);
-    }
+//    @PostMapping("/user/login")     //로그인
+//    public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
+//        return userService.loginUser(userRequestDto, response);
+//    }
 
     @PostMapping("/user/logout")    //로그아웃
     public UserResponseDto logoutUser(HttpServletRequest request) {
         return userService.logoutUser(request);
     }
 
-    @PutMapping("/profile")        //프로필정보 수정
-    public UserResponseDto updateProfile() {
-
-        return null;
+    @PutMapping("/profile/{id}")        //프로필정보 수정
+    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.updateProfile(profileRequestDto, userDetails);
     }
 
     @PutMapping("/profile/password")        //비밀번호 수정
