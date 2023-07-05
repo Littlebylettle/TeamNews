@@ -36,6 +36,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 log.error("Token Error");
                 return;
             }
+            log.info("Valid Token");
             Claims info = jwtUtil.getUserInfoFromToken(token);
             setAuthentication(info.getSubject());
         }
@@ -49,6 +50,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     // 인증 처리
     public void setAuthentication(String username) {
+        log.info("Set Authentication");
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         Authentication authentication = createAuthentication(username);
         context.setAuthentication(authentication);
@@ -60,6 +62,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     // 인증 객체 생성
     private Authentication createAuthentication(String username) {
+        log.info("Create Authentication");
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }

@@ -20,11 +20,14 @@ public class CommentController {
         return "/redirect:/api/post/1";
     }
     @PutMapping("/comment/{id}")            //댓글 수정
-    public String updateComment(){
+    public String updateComment(@PathVariable Long id ,@RequestBody String body, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        commentService.updateComment(id,body,userDetails);
+
         return "/redirect:/api/post/1";//1 자리에 id들어가야함
     }
     @DeleteMapping("/comment/{id}")
-    public String deleteComment(){
+    public String deleteComment(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        commentService.deleteComment(id, userDetails.getUser());
         return "/redirect:/api/post/1";//1 자리에 id들어가야함
     }
 
