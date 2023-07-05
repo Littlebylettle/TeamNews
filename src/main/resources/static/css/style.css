@@ -181,6 +181,7 @@ body {
 
 .login-input-box {
     border-width: 0;
+
     width: 370px !important;
     height: 52px;
     margin: 14px 0 0;
@@ -219,7 +220,8 @@ body {
     margin: 40px 0 0;
     padding: 11px 12px;
     border-radius: 5px;
-    background-color: #15AABF;
+    background-color: #252525;
+
     font-family: SpoqaHanSansNeo;
     font-size: 20px;
     font-weight: bold;
