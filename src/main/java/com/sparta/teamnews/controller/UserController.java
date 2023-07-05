@@ -1,5 +1,6 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.ProfileRequestDto;
 import com.sparta.teamnews.dto.PwdRequestDto;
 import com.sparta.teamnews.dto.SignupRequestDto;
 import com.sparta.teamnews.dto.UserResponseDto;
@@ -8,10 +9,7 @@ import com.sparta.teamnews.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api")
