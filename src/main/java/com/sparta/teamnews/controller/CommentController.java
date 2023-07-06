@@ -1,12 +1,15 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.ApiResponseDto;
 import com.sparta.teamnews.dto.CommentRequestDto;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.CommentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class CommentController {
     private final CommentService commentService;
@@ -14,10 +17,11 @@ public class CommentController {
     public CommentController(CommentService commentService){
         this.commentService = commentService;
     }
+    @ResponseBody
     @PostMapping("/comment")         //댓글 작성
-    public String createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ApiResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         commentService.createComment(commentRequestDto, userDetails);
-        return "/redirect:/api/post/1";
+        return new ApiResponseDto("댓글 작성 완료", HttpStatus.OK.value());
     }
     @PutMapping("/comment/{id}")            //댓글 수정
     public String updateComment(@PathVariable Long id ,@RequestBody String body, @AuthenticationPrincipal UserDetailsImpl userDetails){
