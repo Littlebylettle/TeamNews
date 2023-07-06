@@ -276,7 +276,7 @@ body {
 }
 
 .newpost-box {
-    /* background-color: #FFD43B; */
+    background-color: #FFD43B;
     width: 1100px;
     height: 530px;
     margin: 70px auto;
@@ -300,7 +300,7 @@ body {
     border-width: 0;
     
     width: 450px !important;
-    height: 340px;
+    height: 341px;
     margin: 14px 0 0;
     border-radius: 5px;
     background-color: #E9ECEF;
@@ -308,22 +308,24 @@ body {
 }
 
 .input-box{
+    width: 460px;
+    height: 435px;
     /* background-color: #77b1a6; */
     float: right;
     padding-right: 30px;
 }
-
 #post-id-submit {
     border-width: 0;
     width: 170px;
     height: 50px;
     flex-grow: 0;
+    float: left;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin: 460px 455px ;
+    margin: 20px 0px 0px 470px ;
     padding: 5px 12px;
     border-radius: 5px;
     background-color: #252525;
@@ -344,15 +346,21 @@ body {
     /* background-color: #b2545e; */
     width: 580px;
     height: 430px;
-    border: 2px solid #252525;
+    /* border: 2px solid #252525; */
     float: left
 }
 .postimage {
     width: 580px;
     height: 430px;
     box-sizing: border-box;
-    background-image: url('https://www.ccbk.co.kr/images/product/detail/product401.jpg');
+    /* background-image: url('https://www.ccbk.co.kr/images/product/detail/product401.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    background-color: #ebeaea;
+}
+.file{
+    margin: 190px;
+    font-family: SpoqaHanSansNeo;
 }
