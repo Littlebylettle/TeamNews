@@ -120,7 +120,7 @@ body {
 }
 
 #login-title {
-    width: 303px;
+    width: 393px;
     height: 32px;
     /*margin: 56px auto auto auto;*/
     flex-grow: 0;
@@ -131,7 +131,7 @@ body {
     font-style: normal;
     line-height: 1;
     letter-spacing: -0.96px;
-    text-align: left;
+    text-align: center;
     color: #212529;
 }
 
