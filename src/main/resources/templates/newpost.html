@@ -42,8 +42,8 @@
 
         function onPost() {
 
-            var authCookie = Cookies.get("Authorization");
-            var formData = new FormData();
+            let authCookie = Cookies.get("Authorization");
+            let formData = new FormData();
             formData.append('title', $('#title').val());
             formData.append('content', $('#content').val());
             formData.append('file', $('input[type="file"]')[0].files[0]);
@@ -62,8 +62,6 @@
                     window.location.reload();
                 },
                 error: function(xhr, status, error) {
-                    alert("error");
-                    // 요청 실패 시 처리할 로직
                 }
             });
             window.location.href = '/';

@@ -34,10 +34,10 @@ public class Post extends Timestamped{ //news 게시글 Entity
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE})
     private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE})
     private List<Comment> LikeList = new ArrayList<>();
 
 

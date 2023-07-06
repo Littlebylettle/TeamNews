@@ -363,7 +363,7 @@
 <!-- 헤더2 -->
 <div class="header2">
   <button class="update">Edit</button>
-  <button class="delete">Delete</button>
+  <button class="delete" onclick="deletePost()">Delete</button>
 </div>
 <!-- 헤더2 -->
 <!-- 메인 -->
@@ -422,6 +422,27 @@
         }
       });
   })
+
+  function deletePost() {
+    let authCookie = Cookies.get("Authorization");
+    $.ajax({
+      type: "DELETE",
+      url: `/api/post/${postnum}`,
+      contentType: "application/json",
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("게시물 삭제 완료")
+        window.location.href = "/";
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+        alert("게시물 삭제 실패")
+      }
+    })
+  }
 
   function onComment() {
     let body = $('#comment-submit').val();

@@ -1,9 +1,11 @@
 package com.sparta.teamnews.controller;
 
+import com.sparta.teamnews.dto.ApiResponseDto;
 import com.sparta.teamnews.dto.PostRequestDto;
 import com.sparta.teamnews.dto.PostResponseDto;
 import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.PostService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,8 +48,8 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")    //게시글 삭제
-    public PostResponseDto deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ApiResponseDto deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(id, userDetails.getUser());
-        return new PostResponseDto(true);
+        return new ApiResponseDto("게시글 삭제 완료", HttpStatus.OK.value());
     }
 }
