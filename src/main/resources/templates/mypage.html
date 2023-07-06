@@ -70,7 +70,7 @@
 
         $.ajax({
             type: "PUT",
-            url: `/api/profile`,
+            url: `/api/user/profile`,
             contentType: "application/json",
             data: JSON.stringify({modifyprofilename: profilename, modifyintroduce: introduce}),
             headers: {
@@ -78,18 +78,14 @@
             },
         })
             .done(function () {
-                    console.log('잘 되었습니다...');
+                    alert('프로필 수정 잘 되었습니다...');
                     window.location.href = host;
                 }
             )
             .fail(function (xhr, textStatus, errorThrown) {
                 console.log('statusCode: ' + xhr.status);
-                console.log('뭔가 잘못되었습니다...');
-
-                // window.location.href = host + '/mypage.html'
+                alert('프로필 수정 뭔가 잘못되었습니다...');
             });
-
-        // window.location.href = host + "/mypage.html";
     }
 
     // 특정 쿠키 값을 가져오는 함수
