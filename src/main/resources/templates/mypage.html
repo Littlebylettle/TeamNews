@@ -1,12 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <script src="/js/basic.js"></script>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+
+<body>
+<div id="login-form">
+    <div id="login-title">Today Outfit Mypage</div>
+    <br>
+    <br>
+    <button id="login-id-btn" onclick="location.href='/passwordchange.html'">
+        비밀번호 수정하기
+    </button>
+    <div>
+        <div class="login-id-label">ID</div>
+        <textarea type="text" name="username" id="username" class="profile-box" readonly>username1</textarea>
+
+        <div class="login-id-label">프로필 이름</div>
+        <textarea type="text" name="profilename" id="profilename" class="profile-box" readonly>profilename1</textarea>
+
+
+        <div class="login-id-label">자기소개</div>
+        <textarea type="text" name="introduce" id="introduce" class="profile-box" readonly>introduce1</textarea>
+
+        <button id="modify-profile" class="confirm-btn" onclick="modifyProfile()">
+            수정하기
+        </button>
+        <button id="confirm-modify" class="confirm-btn" style="display: none" onclick="confirmModifyProfile()">
+            완료하기
+        </button>
+    </div>
+    <div id="login-failed" style="display: none" class="alert alert-danger" role="alert">로그인에 실패하였습니다.</div>
+</div>
 </body>
+<script>
+    $(document).ready(function () {
+
+    });
+
+    const host = 'http://' + window.location.host;
+
+    const href = location.href;
+
+
+    function modifyProfile() {
+        $('#modify-profile').hide();
+        $('#confirm-modify').show();
+        document.getElementById("profilename").readOnly = false;
+        document.getElementById("introduce").readOnly = false;
+
+        let profilename = $('#profilename').val();
+        let introduce = $('#introduce').val();
+
+        console.log(profilename, introduce);
+    }
+
+    function confirmModifyProfile() {
+        $.ajax({
+            type: "PUT",
+            url: `/api/profile`,
+            contentType: "application/json",
+            data: JSON.stringify({modifyprofilename: profilename, modifyintroduce: introduce}),
+        })
+            .done(function () {
+                console.log('잘 되었습니다...');
+
+                // window.location.href = host;
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                console.log('뭔가 잘못되었습니다...');
+
+                // window.location.href = host + '/mypage.html'
+            });
+
+        // window.location.href = host + "/mypage.html";
+
+    }
+
+</script>
+
 </html>
