@@ -1,6 +1,7 @@
 package com.sparta.teamnews.service;
 
 import com.sparta.teamnews.dto.ApiResponseDto;
+import com.sparta.teamnews.dto.LikeResponseDto;
 import com.sparta.teamnews.dto.PostResponseDto;
 import com.sparta.teamnews.entity.Comment;
 import com.sparta.teamnews.entity.Like;
@@ -24,7 +25,7 @@ public class LikeService {
         this.postService = postService;
     }
 
-    public ApiResponseDto createPostLike(Long postId, UserDetailsImpl userDetails) {
+    public LikeResponseDto createPostLike(Long postId, UserDetailsImpl userDetails) {
 
         Post post = postService.findPost(postId);
 
@@ -40,7 +41,7 @@ public class LikeService {
             throw new IllegalArgumentException("좋아요를 누른적이 있습니다.");
         }
 
-        return new ApiResponseDto("좋아요 성공", 200);
+        return new LikeResponseDto(like);
 
     }
 

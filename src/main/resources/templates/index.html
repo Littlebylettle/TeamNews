@@ -81,7 +81,7 @@
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
                             <button class="like-button" onclick="toggleLike(this)">
-                                <span class="icon">❤</span>
+                                <span class="icon" style="color: red;">❤</span>
                                 <span class="counter">0</span>
                             </button>
                         </div>
@@ -112,15 +112,23 @@
 
                 response.forEach(function(post) {
 
-                    console.log(post.savedPath);
-                    var card = '<div class="col" onclick="detail('+ post.id+ ')">' +
-                        '<div class="card h-100" >' +
-                        '<img referrerpolicy="no-referrer" src=' + post.savedPath + ' class="card-img-top" alt="...">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title">' + post.profilename + '</h5>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
+                    console.log(post);
+                    // var obj = JSON.parse(post);
+                    // console.log(obj.title);
+                    var card = `<div class="col" id = 1>
+                        <div class="card h-100">
+                        <img src=${post.savedPath}
+                    class="card-img-top"  onclick="detail(${post.id})" alt="...">
+                        <div class="card-body">
+                        <span data-id="${post.id}" class="post-id" style="display: none">${post.id}</span>
+                        <h5 class="card-title">${post.profilename}</h5>
+                        <button class="like-button" onclick="toggleLike(this)">
+                            <span class="icon"style="color: #721C24">❤</span>
+                            <span class="counter"style="color: white">${post.like}</span>
+                        </button>
+                </div>
+                </div>
+                </div>`
 
                     postCards.append(card);
 
@@ -131,6 +139,8 @@
             }
         });
     });
+
+
 // 페이지 로드 시 전체 게시물을 가져와서 동적으로 추가
 //     loadAllPosts();
 
@@ -139,6 +149,7 @@
     }
 
     function toggleLike(button) {
+
         let authCookie = Cookies.get("Authorization");
         let postId = $(button).closest('.card').find('.post-id').data('id');
         console.log(postId);
@@ -177,13 +188,14 @@
                     console.log("성공")
                     // 성공 처리 로직
                     $(button).addClass('liked');
+                    window.location.reload(); //새로고침
                 },
                 error: function(xhr, status, error) {
-                    console.log("실패")
-                    // 에러 처리 로직
+                    console.log("실패");
                 }
             });
         }
     }
+
 </script>
 </html>
