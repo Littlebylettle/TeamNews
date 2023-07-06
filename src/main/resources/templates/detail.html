@@ -1,500 +1,208 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-
-
-  <title>TodayOutfitDetail</title>
-
-  <style>
-    * {
-      font-family: SpoqaHanSansNeo;
-    }
-    body {
-      width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header {
-      position: fixed;
-      top: 0px;
-      background-color: white;
-      width: auto;
-      height: 150px;
-      display: flex;
-      margin: 0px;
-      z-index: 30;
-    }
-
-    #header-title-select-shop {
-      color: #252525;
-      margin-top: 30px;
-      font-size: 50px;
-      margin-left: 30px;
-      letter-spacing: 1.1px;
-      font-family: SpoqaHanSansNeo;
-      font-size: 70px;
-      font-weight: bold;
-    }
-
-    .header2 {
-      height: 35px;
-      margin-left: 30px;
-      margin-right: 30px;
-      display: flex;
-      justify-content: right;
-      margin-bottom: 5px;
-    }
-    .update {
-      padding: 5px 10px;
-      height: 35px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .delete {
-      margin-left: 5px;
-      padding: 5px 10px;
-      height: 35px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .main {
-      height: 600px;
-      width: auto;
-      margin-left: 30px;
-      margin-right: 30px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      border-radius: 1%;
-    }
-    .time {
-      font-size: 20px;
-      color: #252525;
-      width: 500px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: right;
-
-    }
-    .imagebox {
-      height: 500px;
-      width: 500px;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border-radius: 1%;
-    }
-    .detail {
-      height: 500px;
-      width: 500px;
-
-    }
-    .detail-title {
-      width: 500px;
-      height: 60px;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      border-radius: 1%;
-      font-size: 25px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .detail-content{
-      margin-top: 100px;
-      width: 500px;
-      height: 340px;
-      border: solid;
-      border-color: #252525;
-      border-radius: 1%;
-      box-sizing: border-box;
-      font-size: 25px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: scroll;
-    }
-
-
-    .comment-input-wrapper {
-      width: auto;
-      margin-top: 10px;
-      margin-left: 30px;
-      margin-right: 30px;
-      border: solid;
-      border-color: #252525;
-      border-radius: 1%;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-
-    }
-    .comment-input-wrapper2 {
-      width: auto;
-      margin-top: 10px;
-      margin-left: 30px;
-      margin-right: 30px;
-      border: solid;
-      border-color: #252525;
-      border-radius: 1%;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-
-    }
-    .comment-box {
-      display: flex;
-      justify-content: space-between;
-      margin-right: 5px;
-    }
-
-    .comment-box .buttons-container {
-      display: flex;
-      gap: 5px;
-    }
-
-    .comment-input-wrapper .comment-box {
-      flex: 1; /* 수정된 부분: comment-box 영역이 남은 공간을 차지하도록 설정 */
-    }
-    .comment-input-wrapper2 .comment-box {
-      flex: 1; /* 수정된 부분: comment-box 영역이 남은 공간을 차지하도록 설정 */
-    }
-    .comment-input-wrapper .timestamp {
-      text-align: right; /* 수정된 부분: 오른쪽 정렬 */
-      margin-right: 5px;
-    }.comment-input-wrapper2.timestamp {
-       text-align: right; /* 수정된 부분: 오른쪽 정렬 */
-       margin-right: 5px;
-     }
-    .profilename {
-      width: 100px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-    }
-    .update2 {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .delete2 {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .comment-input {
-      flex: 1;
-      height: 100%;
-      border: none;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 1%;
-      align-items: center;
-    }
-
-    .comment-submit {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-
-  </style>
-
-  <script>
-    // $(document).ready(function() {
-    //   // 페이지 로드 시 데이터 가져오기
-    //   const postId = getPostIdFromURL();
-    //   if (postId) {
-    //     fetchPostData(postId);
-    //   }
-    // });
-    // function getPostIdFromURL() {
-    //   // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
-    //   const url = window.location.href;
-    //   const parts = url.split("/");
-    //   const idIndex = parts.findIndex(part => part === "post") + 1;
-    //   if (idIndex < parts.length) {
-    //     return parts[idIndex];
-    //   }
-    //   return null;
-    // }
-    //
-    // function fetchPostData(postId) {
-    //   // AJAX 요청을 통해 게시물 데이터 가져오기
-    //   $.ajax({
-    //     url: `/api/post/${postId}`,
-    //     type: "GET",
-    //     success: function(data) {
-    //       // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
-    //       displayPostData(data);
-    //     },
-    //     error: function() {
-    //       // 요청이 실패했을 때 실행되는 콜백 함수
-    //       console.error("Failed to fetch post data.");
-    //     }
-    //   });
-    // }
-    //
-    // function displayPostData(data) {
-    //   // 게시물 데이터를 HTML에 표시하는 함수
-    //   const imageElement = $(".imagebox");
-    //   const titleElement = $(".detail-title");
-    //   const contentElement = $(".detail-content");
-    //   // const createdAtElement = $(".time");
-    //
-    //   // 데이터를 각각의 요소에 적절히 표시
-    //   titleElement.text(data.title);
-    //   contentElement.text(data.content);
-    //   imageElement.css("background-image", `url(${data.image})`);
-    //   // createdAtElement.text(data.timestamp);
-    // }
-    //
-
-    //
-    // $(document).ready(function () {
-    //   // 댓글 등록 버튼 클릭 이벤트
-    //   $('.comment-submit').click(function () {
-    //     const comment = $('.comment-input').val();
-    //     if (comment !== '') {
-    //       const timestamp = getTimestamp();
-    //       addComment(comment, timestamp);
-    //       $('.comment-input').val('');
-    //     }
-    //   });
-    // });
-    // function addComment(comment, timestamp) {
-    //   const commentWrapper = $('<div class="comment-input-wrapper"></div>');
-    //   const profileName = $('<div class="profilename">profilename</div>');
-    //   const commentText = $('<div class="comment-text"></div>').text(comment);
-    //   const timestampDiv = $('<div class="timestamp"></div>').text(timestamp);
-    //   const commentBox = $('<div class="comment-box"></div>');
-    //   commentText.appendTo(commentBox);
-    //   profileName.appendTo(commentWrapper);
-    //   commentBox.appendTo(commentWrapper);
-    //   timestampDiv.appendTo(commentWrapper);
-    //
-    //   // Create edit and delete buttons
-    //   const editButton = $('<button class="edit-button">Edit</button>');
-    //   const deleteButton = $('<button class="delete-button">Delete</button>');
-    //
-    //   // 버튼을 가로로 나란히 표시하기 위해 commentBox 내부에 버튼을 추가
-    //   const buttonsContainer = $('<div class="buttons-container"></div>');
-    //   editButton.appendTo(buttonsContainer);
-    //   deleteButton.appendTo(buttonsContainer);
-    //   buttonsContainer.appendTo(commentBox);
-    //
-    //   // 수정 버튼 클릭 이벤트 핸들러
-    //   editButton.click(function() {
-    //     const newComment = prompt('댓글을 수정하세요:', comment);
-    //     if (newComment !== null) {
-    //       commentText.text(newComment);
-    //       timestampDiv.text(getTimestamp());
-    //     }
-    //   });
-    //
-    //   // 삭제 버튼 클릭 이벤트 핸들러
-    //   deleteButton.click(function() {
-    //     commentWrapper.remove();
-    //   });
-    //
-    //   commentWrapper.appendTo('#comments-container');
-    // }
-
-    function getTimestamp() {
-      const now = new Date();
-      const year = now.getFullYear().toString();
-      const month = (now.getMonth() + 1).toString().padStart(2, '0');
-      const day = now.getDate().toString().padStart(2, '0');
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
-
-      return timestamp;
-    }
-  </script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <!-- 부트스트랩 -->
+    <script src="/js/basic.js"></script>
 </head>
-
-<body>
+<body2>
 <!-- 헤더 -->
 <div class="header" style="position:static;">
-  <div id="header-title-select-shop">
-    Today Outfit
-  </div>
+    <div id="header-title-select-shop">
+        Today Outfit
+    </div>
 </div>
 <!-- 헤더 -->
 <!-- 헤더2 -->
 <div class="header2">
-  <button class="update">Edit</button>
-  <button class="delete">Delete</button>
+    <button class="update">Edit</button>
+    <button class="delete">Delete</button>
 </div>
 <!-- 헤더2 -->
 <!-- 메인 -->
 <div class="main">
-  <div class = "imagebox"></div>
-  <div class = "detail">
-    <div class = "detail-title"></div>
-    <div class = "detail-content"> </div>
-    <div class = "time"> </div>
-    <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
-  </div>
+    <div class="imagebox" style="width: 500px; height: 500px;"></div>
+    <div class="detail">
+        <div class="detail-title">300보고 Feel 꽂힌 출근 룩</div>
+        <div class="detail-content"></div>
+        <div class="time"> 2023-07-06 09:00</div>
+        <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
+    </div>
 </div>
 <!-- 메인 -->
 
+
 <!-- 댓글 -->
 <div class="comment-input-wrapper">
-<!--  <div class="profilename">profilename</div>-->
-  <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
-  <button class="comment-submit" onclick="onComment()">등록</button>
+    <!--  <div class="profilename">profilename</div>-->
+    <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
+    <button class="comment-submit" onclick="onComment()">등록</button>
 </div>
-<!-- 댓글 -->
-
-<div class="comment-input-wrapper2">
-  <div class="profilename"></div>
-  <div class="comment-input"></div>
-  <div class="header3">
-    <button class="update2" onclick="editComment()">Edit</button>
-    <button class="delete2" onclick="deleteComment()">Delete</button>
-  </div>
+<div class="comment-container">
+    <!-- 댓글 -->
+    <div class="comment-input-wrapper">
+        <div class="profilename">profilename</div>
+        <div class="comment-input">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+        <div class="header3">
+            <button class="update2" onclick="editComment()">Edit</button>
+            <button class="delete2" onclick="deleteComment()">Delete</button>
+        </div>
+    </div>
 </div>
 
-<!-- 댓글 목록 영역 -->
+<!--&lt;!&ndash; 댓글 목록 영역 &ndash;&gt;-->
+<!--<div id="comments-container"></div>-->
 
+<!--</div>-->
 
-
-
-</body>
+</body2>
 <script>
-  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
-  $(document).ready(function() {
+    function getTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear().toString();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
 
-      $.ajax({
-        url: `/api/post/${postnum}`,
-        type: "GET",
-        contentType: 'application/json',
-        headers: {
-          'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
-        },
-        success: function(response) {
-          $('.imagebox').html('<img src="' + response.image + '">');
-          $('.detail-title').text(response.title);
-          $('.detail-content').text(response.content);
-          $('.time').text(response.createdAt);
+        return timestamp;
+    }
 
-          var commentBox = $('.comment-input-wrapper2');
-          $('.comment-input-wrapper2').empty()
-          console.log(response)
-          let commentList = response.comment;
-          commentList.forEach(function(comment) {
-            console.log(comment)
-            var box = '<div className="comment-input-wrapper2" id= "+ comment.id+")>' +
-              '<div className="profilename">' + comment.profilename + '</div>' +
-              '<div className="comment-input">' + comment.body + '</div>' +
-             '<div className="header3">' +
-                '<button className="update2" onClick="editComment()">Edit</button>' +
-                '<button className="delete2" onClick="deleteComment()">Delete</button>' +
-              '</div>' +
-            '</div>';
+    let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+    $(document).ready(function () {
 
-            commentBox.append(box);
-          });
-        },
-        error: function(xhr, status, error) {
-          console.error(error);
-        }
-      });
-  })
+        $.ajax({
+            url: `/api/post/${postnum}`,
+            type: "GET",
+            contentType: 'application/json',
+            headers: {
+                'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
+            },
+            success: function (response) {
+                $('.imagebox').html('<img src="' + response.image + '">');
+                $('.detail-title').text(response.title);
+                $('.detail-content').text(response.content);
+                $('.time').text(response.createdAt);
 
-  function onComment() {
-    let body = $('#comment-submit').val();
-    let postId = parseInt(postnum, 10);// postnum을 문자열에서 long으로 변환
-    let authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8080/api/comment",
-      contentType: "application/json",
-      data: JSON.stringify({postId: postId ,body: body}),
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        console.log(response);
+                // var commentBox = $('.comment-input-wrapper');
+                $('.comment-container').empty();
 
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        alert("실패")
-        // 요청 실패 시 처리할 로직
-      }
-    });
-  }
+                let commentList = response.comment;
 
-  function editComment() {
+                commentList.forEach(function (comment) {
+                    console.log(comment)
+                    // var box = '<div className="comment-input-wrapper" id= "+ comment.id+")>' +
+                    //     '<div className="profilename">' + comment.profilename + '</div>' +
+                    //     '<div className="comment-input">' + comment.body + '</div>' +
+                    //     '<div className="header2">' +
+                    //     '<button className="update2" onClick="editComment()">Edit</button>' +
+                    //     '<button className="delete2" onClick="deleteComment()">Delete</button>' +
+                    //     '</div>' +
+                    //     '</div>';
+                    var box = `<div class="comment-input-wrapper" id="${comment.id}">
+                                    <div class="profilename">${comment.profilename}</div>
+                                    <div class="comment-input">${comment.body}</div>
+                                    <div class="header3">
+                                        <button class="update2" onclick="editComment()">Edit</button>
+                                        <button class="delete2" onclick="deleteComment()">Delete</button>
+                                    </div>
+                                </div>`;
 
-  }
-
-  function deleteComment() {
-    $.ajax({
-      type: "DELETE",
-      url: `/api/comment/{id}`,
-      contentType: "application/json",
-      data: JSON.stringify({}),
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-      }
+                    $('.comment-container').append(box);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
     })
-  }
+
+    function onComment() {
+        let body = $('#comment-submit').val();
+        let authCookie = Cookies.get("Authorization");
+
+        $.ajax({
+            type: "POST",
+            url: `/api/comment/${postnum}`,
+            contentType: "application/json",
+            data: JSON.stringify({body: body}),
+            headers: {
+                'Authorization': authCookie
+            },
+            success: function (response) {
+                console.log(response);
+
+                // 요청 성공 시 처리할 로직
+                alert("댓글 작성 완료")
+                window.location.reload(); //새로고침
+            },
+            error: function (xhr, status, error) {
+                alert("실패")
+                // 요청 실패 시 처리할 로직
+            }
+        });
+    }
+
+    function editComment() {
+        //postnum -> commentnum 대체 필요
+
+        $.ajax({
+            type: "PUT",
+            url: `/api/comment/${postnum}`,
+            contentType: "application/json",
+            data: JSON.stringify({body: body}),
+            headers: {
+                'Authorization': authCookie
+            },
+            success: function (response) {
+                // 요청 성공 시 처리할 로직
+                alert("댓글 수정 완료");
+                window.location.reload(); //새로고침
+            },
+            error: function (xhr, status, error) {
+                // 요청 실패 시 처리할 로직
+                alert("댓글 수정 실패...");
+            }
+        });
+    }
+
+    function deleteComment() {
+        //postnum -> commentnum 대체 필요
+
+        $.ajax({
+            type: "DELETE",
+            url: `/api/comment/${postnum}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': authCookie
+            },
+            success: function (response) {
+                // 요청 성공 시 처리할 로직
+                alert("댓글 삭제 완료");
+                window.location.reload(); //새로고침
+            },
+            error: function (xhr, status, error) {
+                // 요청 실패 시 처리할 로직
+                alert("댓글 삭제 실패...");
+            }
+        });
+    }
 </script>
 
 </html>
