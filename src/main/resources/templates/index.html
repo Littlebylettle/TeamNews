@@ -40,10 +40,11 @@
             LOGOUT
         </a>
         <div class="postbox" style="display: none">
-            <a id="new-text" href="">
+            <a id="new-text" href="/api/user/new-post">
                 New Post
             </a>
         </div>
+
         <!-- 게시글-->
         <div class="cards">
             <div id="cards" class="row row-cols-1 row-cols-md-5 g-5">
@@ -67,7 +68,9 @@
                 </div>
             </div>
         </div>
+        <!-- 게시글-->
     </div>
+    <!-- 로그인 전 화면 -->
 </div>
 </body>
 <script>
@@ -102,7 +105,7 @@
         }
     });
 // 페이지 로드 시 전체 게시물을 가져와서 동적으로 추가
-    loadAllPosts();
+//     loadAllPosts();
 
     function detail(id) {
         window.location.href = '/api/post/' + id;

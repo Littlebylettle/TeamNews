@@ -34,4 +34,6 @@ public class HomeController {
         postService.getPost(id);
         return "detail";
     }
+    @GetMapping("/api/user/new-post")
+    public String newPostPage() { return "newpost";}
 }
