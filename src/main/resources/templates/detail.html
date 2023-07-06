@@ -134,7 +134,7 @@
         return timestamp;
     }
 
-  
+
   function deletePost() {
     let authCookie = Cookies.get("Authorization");
     $.ajax({
@@ -155,7 +155,7 @@
       }
     })
   }
-  
+
   function BtnChange(){
     const btnElement = document.getElementById('editBtn');
     var edit = "Edit";
@@ -173,7 +173,7 @@
       editPost()
     }
   }
-      
+
   function editPost(){
     let modifytitle = $('#title').val();
     let modifycontent = $('#content').val();
