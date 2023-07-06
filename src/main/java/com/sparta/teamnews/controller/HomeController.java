@@ -24,7 +24,7 @@ public class HomeController {
         return "mypage";
     }
 
-    @GetMapping("/api/passwordchange")
+    @GetMapping("/api/user/passwordchange")
     public String passwordChange() {
         return "passwordchange";
     }

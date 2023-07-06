@@ -32,16 +32,20 @@ public class UserController {
         return new ApiResponseDto("로그인완료", HttpStatus.OK.value());
     }
 
+    @ResponseBody
     @PostMapping("/user/logout")    //로그아웃
     public UserResponseDto logoutUser(HttpServletRequest request) {
         return userService.logoutUser(request);
     }
 
+    @ResponseBody
     @PutMapping("/profile")     //프로필정보 수정
-    public UserResponseDto updateProfile(@RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return userService.updateProfile(profileRequestDto, userDetails);
+    public ApiResponseDto updateProfile(@RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        userService.updateProfile(profileRequestDto, userDetails);
+        return new ApiResponseDto("프로필 업데이트 완료", HttpStatus.OK.value());
     }
 
+    @ResponseBody
     @PutMapping("/profile/password")       //비밀번호 수정
     public UserResponseDto updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return userService.updatePassword(pwdRequestDto,userDetails);
