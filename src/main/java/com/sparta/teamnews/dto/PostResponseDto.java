@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 public class PostResponseDto {
     private Long id;
-    private String image;
     private String title;
     private String profilename;
     private String content;

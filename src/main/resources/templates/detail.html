@@ -362,17 +362,17 @@
 <!-- 헤더 -->
 <!-- 헤더2 -->
 <div class="header2">
-  <button class="update">Edit</button>
-  <button class="delete">Delete</button>
+  <button class="update" id="editBtn"  onclick="BtnChange() ">Edit</button>
+  <button class="delete" onclick="deletePost()">Delete</button>
 </div>
 <!-- 헤더2 -->
 <!-- 메인 -->
 <div class="main">
   <div class = "imagebox" style="width: 500px; height: 500px;"></div>
   <div class = "detail">
-    <div class = "detail-title">300보고 Feel 꽂힌 출근 룩</div>
-    <div class = "detail-content"> </div>
-    <div class = "time"> 2023-07-06 09:00 </div>
+    <textarea type="text" readonly class = "detail-title" name="title" id="title">300보고 Feel 꽂힌 출근 룩</textarea>
+    <textarea type="text" readonly class = "detail-content" name="content" id="content"> </textarea>
+    <div class = "time" name="modifiedTime" id="modifiedTime"> 2023-07-06 09:00 </div>
     <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
   </div>
 </div>
@@ -448,25 +448,53 @@
       }
     });
   }
-
-  function editComment() {
+  function BtnChange(){
+    const btnElement = document.getElementById('editBtn');
+    var edit = "Edit";
+    console.log(btnElement.innerText+ "값");
+    if(btnElement.innerText === edit)
+    {
+      btnElement.innerText = 'Ok';
+      document.getElementById("title").readOnly = false;
+      document.getElementById("content").readOnly = false;
+    }
+    else{
+      btnElement.innerText = "Edit";
+      document.getElementById("title").readOnly = true;
+      document.getElementById("content").readOnly = true;
+      editPost()
+    }
+  }
+  function editPost(){
+    let modifytitle = $('#title').val();
+    let modifycontent = $('#content').val();
+    let modifiedTime = $('#modifiedTime').val();
+    var authCookie = Cookies.get("Authorization");
     $.ajax({
       type: "PUT",
-      url: `/api/comment/${postnum}`,
-      contentType: "application/json",
-      data: JSON.stringify({}),
+      url: `/api/post/${postnum}  `,
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({title: modifytitle, content: modifycontent,
+       modifiedAt:modifiedTime}),
       headers: {
-        'Authorization': authCookie
+        "Authorization": authCookie,
       },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-      }
     })
+            .done(function () {
+                      alert('게시글 수정 잘 되었습니다...');
+                      window.location.href = host + "/";
+                    }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log('statusCode: ' + xhr.status);
+              alert('게시글 수정 뭔가 잘못되었습니다...');
+            });
+  }
+  function deletePost(){
+
+  }
+  function editComment() {
+
   }
 
   function deleteComment() {
