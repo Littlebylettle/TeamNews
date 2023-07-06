@@ -49,32 +49,6 @@ public class UserService {
         User user = new User(username, password, profilename, introduce);
         userRepository.save(user);
     }
-    @Transactional
-    public UserResponseDto updatePassword(PwdRequestDto pwdRequestDto, UserDetailsImpl userDetails) { //확일할 패스워드와 유저정보 같이 받아옴
-        String password = pwdRequestDto.getPassword();
-        String modifyPassword = passwordEncoder.encode(pwdRequestDto.getModifyPassword());//패스워드 인코딩
-        if(!passwordEncoder.matches(password,userDetails.getPassword())){ //입력한 패스워드와 유저의 패스워드가 맞는지 확인
-            throw new IllegalArgumentException("수정확인을 위해 필요한 비밀번호가 틀립니다.");
-        }
-
-        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
-        user.setPassword(modifyPassword);
-        UserResponseDto userResponseDto = new UserResponseDto(user);
-        //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
-
-        return userResponseDto;             //Dto 리턴
-    }
-    @Transactional
-    public UserResponseDto updateProfile(ProfileRequestDto profileRequestDto, UserDetailsImpl userDetails) {
-        String modifyprofilename = profileRequestDto.getModifyprofilename();
-        String modifyintroduce = profileRequestDto.getModifyintroduce();
-
-        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
-        user.setProfilename(modifyprofilename);
-        user.setIntroduce(modifyintroduce);
-        UserResponseDto userResponseDto = new UserResponseDto(user);
-        return userResponseDto;             //Dto 리턴
-    }
 
     public UserResponseDto loginUser(UserRequestDto userRequestDto, HttpServletResponse response) {
         String username = userRequestDto.getUsername();
@@ -111,5 +85,39 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 id값이 존재하지 않습니다.")
         );
+    }
+
+    public UserResponseDto getProfile(UserDetailsImpl userDetails) {
+        User user = findUser(userDetails.getId());
+
+        return new UserResponseDto(user);
+    }
+
+    @Transactional
+    public UserResponseDto updateProfile(ProfileRequestDto profileRequestDto, UserDetailsImpl userDetails) {
+        String modifyprofilename = profileRequestDto.getModifyprofilename();
+        String modifyintroduce = profileRequestDto.getModifyintroduce();
+
+        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
+        user.setProfilename(modifyprofilename);
+        user.setIntroduce(modifyintroduce);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        return userResponseDto;             //Dto 리턴
+    }
+
+    @Transactional
+    public UserResponseDto updatePassword(PwdRequestDto pwdRequestDto, UserDetailsImpl userDetails) { //확일할 패스워드와 유저정보 같이 받아옴
+        String password = pwdRequestDto.getPassword();
+        String modifyPassword = passwordEncoder.encode(pwdRequestDto.getModifyPassword());//패스워드 인코딩
+        if(!passwordEncoder.matches(password,userDetails.getPassword())){ //입력한 패스워드와 유저의 패스워드가 맞는지 확인
+            throw new IllegalArgumentException("수정확인을 위해 필요한 비밀번호가 틀립니다.");
+        }
+
+        User user = findUser(userDetails.getId());  //id를 이용해 user찾기
+        user.setPassword(modifyPassword);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        //쿠키 제거 해주기 Logout메서드를 부르면 해결될 듯 하다.
+
+        return userResponseDto;             //Dto 리턴
     }
 }

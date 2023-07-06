@@ -23,11 +23,17 @@ public class HomeController {
     public String loginPage() { return "login";}
 
     @GetMapping("/api/user/signup")
-    public String signupPage() { return "signup";}
+    public String signupPage() {
+        return "signup";
+    }
 
     @GetMapping("/api/user/mypage")
     public String myPage() { return "mypage";}
 
+    @GetMapping("/api/user/passwordchange")
+    public String passwordChange() {
+        return "passwordchange";
+    }
 
     @GetMapping("api/post/{id}")       //게시글 단건 조회
     public String getPost(@PathVariable Long id){

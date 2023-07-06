@@ -8,7 +8,7 @@ import lombok.Getter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
     private String username;
-//    private String password;
+    //    private String password;
     private String introduce;
     private String profilename;
     private String msg;
@@ -16,6 +16,7 @@ public class UserResponseDto {
 
     // 프로필 수정 Response 용 생성자
     public UserResponseDto(User user) {
+        this.username = user.getUsername();
         this.profilename = user.getProfilename();
         this.introduce = user.getIntroduce();
 //        this.password = user.getPassword();
