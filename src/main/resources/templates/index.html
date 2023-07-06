@@ -111,23 +111,17 @@
                 // 게시물 데이터를 반복하면서 카드를 생성하고 추가
 
                 response.forEach(function(post) {
-                    console.log(post);
-                    // var obj = JSON.parse(post);
-                    // console.log(obj.title);
-                    var card = `<div class="col" id = 1>
-                        <div class="card h-100">
-                        <img src=${post.savedPath}
-                    class="card-img-top"  onclick="detail(${post.id})" alt="...">
-                        <div class="card-body">
-                        <span data-id="${post.id}" class="post-id">${post.id}</span>
-                        <h5 class="card-title">${post.profilename}</h5>
-                        <button class="like-button" onclick="toggleLike(this)">
-                          <span class="icon">&#x2764;</span>
-                          <span class="counter">${post.like}</span>
-                        </button>
-                </div>
-                </div>
-                </div>`
+
+                    console.log(post.savedPath);
+                    var card = '<div class="col" onclick="detail('+ post.id+ ')">' +
+                        '<div class="card h-100" >' +
+                        '<img referrerpolicy="no-referrer" src=' + post.savedPath + ' class="card-img-top" alt="...">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">' + post.profilename + '</h5>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
                     postCards.append(card);
 
                 });
