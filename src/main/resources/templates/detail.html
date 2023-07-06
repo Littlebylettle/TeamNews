@@ -361,6 +361,7 @@
     <div class = "detail-title">300보고 Feel 꽂힌 출근 룩</div>
     <div class = "detail-content"> </div>
     <div class = "time"> 2023-07-06 09:00 </div>
+    <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
   </div>
 </div>
 <!-- 메인 -->
@@ -369,15 +370,15 @@
 <div class="comment-input-wrapper">
   <div class="profilename">profilename</div>
   <textarea class="comment-input" placeholder="댓글을 입력하세요"></textarea>
-  <button class="comment-submit">등록</button>
+  <button class="comment-submit" id="comment-submit" onclick="onComment()">등록</button>
 </div>
 <!-- 댓글 -->
 <div class="comment-input-wrapper">
   <div class="profilename">profilename</div>
   <div class="comment-input" ></div>
   <div class="header3">
-    <button class="update2">Edit</button>
-    <button class="delete2">Delete</button>
+    <button class="update2" onclick="editComment()">Edit</button>
+    <button class="delete2" onclick="deleteComment()">Delete</button>
   </div>
 </div>
 
@@ -388,7 +389,81 @@
 
 </body>
 <script>
+  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+  console.log(postnum);
+  $(document).ready(function() {
 
+      $.ajax({
+        url: `/api/post/${postnum}`,
+        type: "GET",
+        contentType: 'application/json',
+        headers: {
+          'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
+        },
+        success: function(response) {
+          console.log(response);
+          $('.imagebox').html('<img src="' + response.image + '">');
+          $('.detail-title').text(response.title);
+          $('.detail-content').text(response.content);
+          $('.time').text(response.createdAt);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+  })
+    // URL에서 포스트 ID를 추출하는 함수
+  // function getPostIdFromUrl() {
+  //   let url = window.location.href;
+  //   let postId = url.substring(url.lastIndexOf("/") + 1);
+  //   return postId;
+  // }
+  function onComment() {
+    let body = $('#comment-submit').val();
+    let postId = post.id;
+    console.log(postId);
+    $.ajax({
+      type: "POST",
+      url: `/api/comment`,
+      contentType: "application/json",
+      data: JSON.stringify({postId: postId ,body: body}),
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("댓글 작성 완료")
+        window.location.reload(); //새로고침
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+      }
+    });
+  }
+
+  function editComment() {
+
+  }
+
+  function deleteComment() {
+    $.ajax({
+      type: "DELETE",
+      url: `/api/comment/{id}`,
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("댓글 작성 완료")
+        window.location.reload(); //새로고침
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+      }
+    })
+  }
 </script>
 
 </html>

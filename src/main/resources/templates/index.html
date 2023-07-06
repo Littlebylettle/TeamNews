@@ -84,7 +84,6 @@
         success: function(response) {
             // 서버에서 반환된 데이터를 동적으로 HTML에 추가
             var postCards = $('#cards');
-
             $('#cards').empty()
             // 게시물 데이터를 반복하면서 카드를 생성하고 추가
             response.forEach(function(post) {
@@ -108,7 +107,7 @@
 //     loadAllPosts();
 
     function detail(id) {
-        window.location.href = '/api/post/' + id;
+        window.location.href = '/api/board?postnum=' + id;
     }
 
 </script>
