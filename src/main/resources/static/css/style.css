@@ -297,7 +297,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin: 20px 0px 0px 500px ;
+    margin: 20px 0px 0px 470px ;
     padding: 5px 12px;
     border-radius: 5px;
     background-color: #252525;
@@ -318,7 +318,7 @@ body {
     /* background-color: #b2545e; */
     width: 580px;
     height: 430px;
-    border: 2px solid #252525;
+    /* border: 2px solid #252525; */
     float: left
 }
 .postimage {
