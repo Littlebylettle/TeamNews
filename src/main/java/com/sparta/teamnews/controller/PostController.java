@@ -7,6 +7,7 @@ import com.sparta.teamnews.security.UserDetailsImpl;
 import com.sparta.teamnews.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,6 +43,8 @@ public class PostController {
         postService.createPost(title,content, userDetails.getUser(), file);
     }
 
+
+    @Transactional
     @PutMapping("/post/{id}")    //게시글 수정
     public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.updatePost(userDetails.getUser(), id, requestDto);

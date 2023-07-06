@@ -49,7 +49,7 @@ public class PostService {
         if (files.isEmpty()) {
             return;
         }
-//         래 파일 이름 추출
+//         원래 파일 이름 추출
         String origName = files.getOriginalFilename();
 
         // 파일 이름으로 쓸 uuid 생성
