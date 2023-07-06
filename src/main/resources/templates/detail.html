@@ -512,7 +512,7 @@
     var authCookie = Cookies.get("Authorization");
     $.ajax({
       type: "PUT",
-      url: `/api/post/${postnum}  `,
+      url: `/api/post/${postnum}`,
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify({title: modifytitle, content: modifycontent,
        modifiedAt:modifiedTime}),
