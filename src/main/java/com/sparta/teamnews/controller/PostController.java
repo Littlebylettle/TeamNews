@@ -24,10 +24,7 @@ public class PostController {
         return postService.getAllPost();
     }
 
-    @GetMapping("/post/{id}")       //게시글 단건 조회
-    public PostResponseDto getPost(@PathVariable Long id){
-        return postService.getPost(id);
-    }
+
 
     @PostMapping("/post")    // 게시글 생성
     public PostResponseDto createPost(@RequestParam("title") String title,
