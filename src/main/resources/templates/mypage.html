@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -28,11 +28,13 @@
         <textarea type="text" name="username" id="username" class="profile-box" readonly>username1</textarea>
 
         <div class="login-id-label">프로필 이름</div>
-        <textarea type="text" name="profilename" id="profilename" class="profile-box" readonly required>profilename1</textarea>
+        <textarea type="text" name="profilename" id="profilename" class="profile-box" readonly
+                  required>profilename1</textarea>
 
 
         <div class="login-id-label">자기소개</div>
-        <textarea type="text" name="introduce" id="introduce" class="profile-box" readonly required>introduce1</textarea>
+        <textarea type="text" name="introduce" id="introduce" class="profile-box" readonly
+                  required>introduce1</textarea>
 
         <button id="modify-profile" class="confirm-btn" onclick="modifyProfile()">
             수정하기
@@ -45,8 +47,29 @@
 </div>
 </body>
 <script>
-    $(document).ready(function () {
+    // 모든 쿠키에 접근
+    var cookies = document.cookie;
 
+    // 특정 쿠키에 접근
+    var authCookie = getCookie("Authorization");
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/api/user/profile', // 요청을 보낼 서버의 URL
+            method: 'GET', // 요청 메소드 (GET, POST 등)
+            headers: {
+                "Authorization": authCookie,
+            },
+            success: function (response) {
+                setTextareaValue("username", response.username);
+                setTextareaValue("profilename", response.profilename);
+                setTextareaValue("introduce", response.introduce);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert("마이페이지 유저정보 받아오기 뭔가 잘못되었습니다...");
+            }
+        });
     });
 
     const host = 'http://' + window.location.host;
@@ -59,19 +82,13 @@
     }
 
     function confirmModifyProfile() {
-        // 모든 쿠키에 접근
-        var cookies = document.cookie;
-
-        // 특정 쿠키에 접근
-        var authCookie = getCookie("Authorization");
-
         let profilename = $('#profilename').val();
         let introduce = $('#introduce').val();
 
         $.ajax({
             type: "PUT",
             url: `/api/user/profile`,
-            contentType: "application/json",
+            contentType: "application/json; charset=utf-8",
             data: JSON.stringify({modifyprofilename: profilename, modifyintroduce: introduce}),
             headers: {
                 "Authorization": authCookie,
@@ -79,7 +96,7 @@
         })
             .done(function () {
                     alert('프로필 수정 잘 되었습니다...');
-                    window.location.href = host;
+                    window.location.href = host + "/api/user/mypage";
                 }
             )
             .fail(function (xhr, textStatus, errorThrown) {
@@ -103,6 +120,11 @@
             }
         }
         return "";
+    }
+
+    function setTextareaValue(Id, value) {
+        var textarea = document.getElementById(Id);
+        textarea.value = value;
     }
 
 </script>

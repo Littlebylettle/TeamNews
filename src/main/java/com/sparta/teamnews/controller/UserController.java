@@ -38,16 +38,23 @@ public class UserController {
         return userService.logoutUser(request);
     }
 
+    @ResponseBody
+    @GetMapping("/user/profile")
+    public UserResponseDto getProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.getProfile(userDetails);
+    }
+
+    @ResponseBody
     @PutMapping("/user/profile")     //프로필정보 수정
     public String updateProfile(@RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         userService.updateProfile(profileRequestDto, userDetails);
-        return "redirect:/api/mypage";
+        return "redirect:/api/user/mypage";
     }
 
     @ResponseBody
     @PutMapping("/user/profile/password")       //비밀번호 수정
     public String updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        userService.updatePassword(pwdRequestDto,userDetails);
-        return "redirect:/api/passwordchange";
+        userService.updatePassword(pwdRequestDto, userDetails);
+        return "redirect:/api/user/passwordchange";
     }
 }
