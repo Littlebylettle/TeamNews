@@ -1,10 +1,8 @@
 package com.sparta.teamnews.entity;
 
-import com.sparta.teamnews.dto.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +20,15 @@ public class Post extends Timestamped{ //news 게시글 Entity
     @Column(name="title")
     private String title;   //제목
 
-    @Column(name = "image", nullable = false)
-    private String image;
-  
+
     @Column(name ="content",nullable = false, length = 500)
     private String content;//작성내용
+
+    private String orgNm;
+
+    private String savedNm;
+
+    private String savedPath;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,19 +41,18 @@ public class Post extends Timestamped{ //news 게시글 Entity
     private List<Comment> LikeList = new ArrayList<>();
 
 
-    public Post(PostRequestDto requestDto, User user) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
-        this.image = requestDto.getImage();
+    public Post(String title, String content, String orgNm,String savedNm, String savedPath ,User user) {
+        this.title = title;
+        this.content = content;
+        this.orgNm = orgNm;
+        this.savedNm = savedNm;
+        this.savedPath = savedPath;
         this.user = user;
     }
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public void setContent(String content) {
         this.content = content;
