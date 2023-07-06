@@ -13,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.concurrent.RejectedExecutionException;
 
 @Service
-public class CommentService
-{
+public class CommentService {
     private final CommentRepository commentRepository;
     private final PostService postService;
-    public CommentService(CommentRepository commentRepository,PostService postService){
+
+    public CommentService(CommentRepository commentRepository, PostService postService) {
         this.commentRepository = commentRepository;
         this.postService = postService;
 
@@ -26,15 +26,13 @@ public class CommentService
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto, UserDetailsImpl userDetails) {
 
         Post post = postService.findPost(commentRequestDto.getPostId());
-        Comment comment = new Comment(commentRequestDto.getBody(),post,userDetails.getUser());
+        Comment comment = new Comment(commentRequestDto.getBody(), post, userDetails.getUser());
 
         commentRepository.save(comment);
         CommentResponseDto commentResponseDto = new CommentResponseDto(comment);
 
         return commentResponseDto;
     }
-
-
 
     public void deleteComment(Long id, User user) {
 
@@ -47,18 +45,16 @@ public class CommentService
         commentRepository.delete(comment);
     }
 
- 
-
     @Transactional
-    public void updateComment(Long id,String body, UserDetailsImpl userDetails) {
+    public void updateComment(Long id, CommentRequestDto commentRequestDto, UserDetailsImpl userDetails) {
         Comment comment = findComment(id);
-        if(userDetails.getUsername().equals(comment.getUser().getUsername())){
-            comment.setBody(body);
-        }
-        else{
+        if (userDetails.getUsername().equals(comment.getUser().getUsername())) {
+            comment.setBody(commentRequestDto.getBody());
+        } else {
             throw new IllegalArgumentException("직접쓴 글이 아니면 수정할 수 없습니다.");
         }
     }
+
     public Comment findComment(Long id) {
         return commentRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 댓글은 존재하지 않습니다."));

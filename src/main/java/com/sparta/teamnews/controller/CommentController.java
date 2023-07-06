@@ -14,25 +14,27 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final CommentService commentService;
 
-    public CommentController(CommentService commentService){
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
+
     @ResponseBody
     @PostMapping("/comment")         //댓글 작성
-    public ApiResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ApiResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.createComment(commentRequestDto, userDetails);
         return new ApiResponseDto("댓글 작성 완료", HttpStatus.OK.value());
     }
-    @PutMapping("/comment/{id}")            //댓글 수정
-    public String updateComment(@PathVariable Long id ,@RequestBody String body, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        commentService.updateComment(id,body,userDetails);
 
-        return "/redirect:/api/post/1";//1 자리에 id들어가야함
+    @ResponseBody
+    @PutMapping("/comment/{id}")            //댓글 수정
+    public void updateComment(@PathVariable Long id, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.updateComment(id, commentRequestDto, userDetails);
     }
+
+    @ResponseBody
     @DeleteMapping("/comment/{id}")
-    public String deleteComment(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public void deleteComment(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.deleteComment(id, userDetails.getUser());
-        return "/redirect:/api/post/1";//1 자리에 id들어가야함
     }
 
 

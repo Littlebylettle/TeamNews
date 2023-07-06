@@ -368,7 +368,6 @@ body {
     font-family: SpoqaHanSansNeo;
 }
 
-
 body2 {
     width: 1200px;
     margin: 0 auto;
@@ -576,6 +575,10 @@ body2 {
     cursor: pointer;
 }
 
+.update2:focus {
+    outline: none;
+}
+
 .delete2 {
     padding: 5px 10px;
     height: 52px;
@@ -583,6 +586,10 @@ body2 {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.delete2:focus {
+    outline: none;
 }
 
 .comment-input {
@@ -593,6 +600,16 @@ body2 {
     box-sizing: border-box;
     border-radius: 1%;
     align-items: center;
+
+    resize: none;
+}
+
+.comment-input:focus {
+    outline: none;
+}
+
+.comment-input[readOnly] {
+    background-color: white;
 }
 
 .comment-submit {

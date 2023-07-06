@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -22,7 +21,6 @@
     <script src="/js/basic.js"></script>
 
   <title>TodayOutfitDetail</title>
-
 </head>
 <body2>
 <!-- 헤더 -->
@@ -73,97 +71,9 @@
     </div>
 </div>
 
-<!--&lt;!&ndash; 댓글 목록 영역 &ndash;&gt;-->
-<!--<div id="comments-container"></div>-->
-
-<!--</div>-->
-
 </body2>
 <script>
-
-  
-
-  function deletePost() {
-    let authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "DELETE",
-      url: `/api/post/${postnum}`,
-      contentType: "application/json",
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("게시물 삭제 완료")
-        window.location.href = "/";
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-        alert("게시물 삭제 실패")
-      }
-    })
-  }
-
-  
-  
-  function BtnChange(){
-    const btnElement = document.getElementById('editBtn');
-    var edit = "Edit";
-    console.log(btnElement.innerText+ "값");
-    if(btnElement.innerText === edit)
-    {
-      btnElement.innerText = 'Ok';
-      document.getElementById("title").readOnly = false;
-      document.getElementById("content").readOnly = false;
-    }
-    else{
-      btnElement.innerText = "Edit";
-      document.getElementById("title").readOnly = true;
-      document.getElementById("content").readOnly = true;
-      editPost()
-    }
-  }
-  function editPost(){
-    let modifytitle = $('#title').val();
-    let modifycontent = $('#content').val();
-    let modifiedTime = $('#modifiedTime').val();
-    var authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "PUT",
-      url: `/api/post/${postnum}`,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({title: modifytitle, content: modifycontent,
-       modifiedAt:modifiedTime}),
-      headers: {
-        "Authorization": authCookie,
-      },
-    })
-            .done(function () {
-                      alert('게시글 수정 잘 되었습니다...');
-                      window.location.href = host + "/";
-                    }
-            )
-            .fail(function (xhr, textStatus, errorThrown) {
-              console.log('statusCode: ' + xhr.status);
-              alert('게시글 수정 뭔가 잘못되었습니다...');
-            });
-  }
-
-
-
-    function getTimestamp() {
-        const now = new Date();
-        const year = now.getFullYear().toString();
-        const month = (now.getMonth() + 1).toString().padStart(2, '0');
-        const day = now.getDate().toString().padStart(2, '0');
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
-
-        return timestamp;
-    }
-
-    let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
     $(document).ready(function () {
 
         $.ajax({
@@ -212,76 +122,178 @@
         });
     })
 
+    function getTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear().toString();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+        return timestamp;
+    }
+
+  
+  function deletePost() {
+    let authCookie = Cookies.get("Authorization");
+    $.ajax({
+      type: "DELETE",
+      url: `/api/post/${postnum}`,
+      contentType: "application/json",
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("게시물 삭제 완료")
+        window.location.href = "/";
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+        alert("게시물 삭제 실패")
+      }
+    })
+  }
+  
+  function BtnChange(){
+    const btnElement = document.getElementById('editBtn');
+    var edit = "Edit";
+    console.log(btnElement.innerText+ "값");
+    if(btnElement.innerText === edit)
+    {
+      btnElement.innerText = 'Ok';
+      document.getElementById("title").readOnly = false;
+      document.getElementById("content").readOnly = false;
+    }
+    else{
+      btnElement.innerText = "Edit";
+      document.getElementById("title").readOnly = true;
+      document.getElementById("content").readOnly = true;
+      editPost()
+    }
+  }
+      
+  function editPost(){
+    let modifytitle = $('#title').val();
+    let modifycontent = $('#content').val();
+    let modifiedTime = $('#modifiedTime').val();
+    var authCookie = Cookies.get("Authorization");
+    $.ajax({
+      type: "PUT",
+      url: `/api/post/${postnum}`,
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({title: modifytitle, content: modifycontent,
+       modifiedAt:modifiedTime}),
+      headers: {
+        "Authorization": authCookie,
+      },
+    })
+            .done(function () {
+                      alert('게시글 수정 잘 되었습니다...');
+                      window.location.href = host + "/";
+                    }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+              console.log('statusCode: ' + xhr.status);
+              alert('게시글 수정 뭔가 잘못되었습니다...');
+            });
+  }
+
+    function getTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear().toString();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+        return timestamp;
+    }
 
     function onComment() {
-        let body = $('#comment-submit').val();
         let authCookie = Cookies.get("Authorization");
+
+        let body = $('#comment-submit').val();
+        let postId = parseInt(postnum, 10);
 
         $.ajax({
             type: "POST",
-            url: `/api/comment/${postnum}`,
-            contentType: "application/json",
-            data: JSON.stringify({body: body}),
+            contentType: 'application/json',
+            url: "/api/comment",
+
+            data: JSON.stringify({postId: postId, body: body}),
             headers: {
                 'Authorization': authCookie
             },
-            success: function (response) {
-                console.log(response);
-
-                // 요청 성공 시 처리할 로직
-                alert("댓글 작성 완료")
-                window.location.reload(); //새로고침
-            },
-            error: function (xhr, status, error) {
-                alert("실패")
-                // 요청 실패 시 처리할 로직
-            }
-        });
+        })
+            .done(function () {
+                    alert('댓글 등록 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 등록 뭔가 잘못되었습니다...');
+            });
     }
 
-    function editComment() {
-        //postnum -> commentnum 대체 필요
+    function editComment(button) {
+        let commentnum = button.value;
+        $('#edit' + commentnum).hide()
+        $('#confirm' + commentnum).show()
+        document.getElementById(`input${commentnum}`).readOnly = false;
+    }
+
+    function confirmEdit(button) {
+        let authCookie = Cookies.get("Authorization");
+
+        let commentnum = parseInt(button.value, 10);
+        let body = $('#input' + commentnum).val();
 
         $.ajax({
             type: "PUT",
-            url: `/api/comment/${postnum}`,
-            contentType: "application/json",
-            data: JSON.stringify({body: body}),
+            contentType: 'application/json',
+            url: `/api/comment/${commentnum}`,
+          data: JSON.stringify({body: body}),
             headers: {
                 'Authorization': authCookie
             },
-            success: function (response) {
-                // 요청 성공 시 처리할 로직
-                alert("댓글 수정 완료");
-                window.location.reload(); //새로고침
-            },
-            error: function (xhr, status, error) {
-                // 요청 실패 시 처리할 로직
-                alert("댓글 수정 실패...");
-            }
-        });
+        })
+                      .done(function () {
+                    alert('댓글 수정 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 수정 뭔가 잘못되었습니다...');
+            });
     }
 
-    function deleteComment() {
-        //postnum -> commentnum 대체 필요
+    function deleteComment(button) {
+        let authCookie = Cookies.get("Authorization");
+
+        let commentnum = parseInt(button.value, 10);
 
         $.ajax({
             type: "DELETE",
-            url: `/api/comment/${postnum}`,
-            contentType: "application/json",
+            contentType: 'application/json',
+            url: `/api/comment/${commentnum}`,
             headers: {
                 'Authorization': authCookie
             },
-            success: function (response) {
-                // 요청 성공 시 처리할 로직
-                alert("댓글 삭제 완료");
-                window.location.reload(); //새로고침
-            },
-            error: function (xhr, status, error) {
-                // 요청 실패 시 처리할 로직
-                alert("댓글 삭제 실패...");
-            }
-        });
+        })
+            .done(function () {
+                    alert('댓글 삭제 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 삭제 뭔가 잘못되었습니다...');
+            });
     }
 </script>
 
