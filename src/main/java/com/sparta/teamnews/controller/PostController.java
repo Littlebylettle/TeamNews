@@ -20,20 +20,24 @@ public class PostController {
         this.postService = postService;
     }
     @GetMapping("/post")// 전체 게시글 조회
+    @ResponseBody
     public List<PostResponseDto> getAllPost(){
         return postService.getAllPost();
     }
 
-
+    @GetMapping("/post/{id}")       //게시글 단건 조회
+    public PostResponseDto getPost(@PathVariable Long id){
+        return  postService.getPost(id);
+    }
 
     @PostMapping("/post")    // 게시글 생성
-    public PostResponseDto createPost(@RequestParam("title") String title,
+    public void createPost(@RequestParam("title") String title,
                                       @RequestParam("content") String content,
                                       @RequestParam("file") MultipartFile file,
                                       @AuthenticationPrincipal UserDetailsImpl userDetails
                                       ) throws IOException {
 
-        return postService.creatPost(title,content, userDetails.getUser(), file);
+        postService.createPost(title,content, userDetails.getUser(), file);
     }
 
     @PutMapping("/post/{id}")    //게시글 수정

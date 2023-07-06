@@ -27,10 +27,12 @@ public class PostService {
 
 
     public List<PostResponseDto> getAllPost() {
-        return postRepository.findAllByOrderByCreatedAtDesc()
+        List<PostResponseDto> responseDtoList = postRepository.findAll()
                 .stream()
                 .map(PostResponseDto::new)
                 .toList();
+
+        return responseDtoList;
     }
 
     @Transactional(readOnly = true)
@@ -43,11 +45,11 @@ public class PostService {
 
 
     //게시물 생성
-    public PostResponseDto creatPost(String title,String content, User user, MultipartFile files) throws IOException {
+    public void createPost(String title, String content, User user, MultipartFile files) throws IOException {
         if (files.isEmpty()) {
-            return null;    //이미지가 없을 때
+            return;
         }
-//         원래 파일 이름 추출
+//         래 파일 이름 추출
         String origName = files.getOriginalFilename();
 
         // 파일 이름으로 쓸 uuid 생성
@@ -69,7 +71,7 @@ public class PostService {
 
 
         postRepository.save(post);
-        return new PostResponseDto(post);
+
     }
 
     @Transactional
