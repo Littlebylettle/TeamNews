@@ -218,6 +218,56 @@
   </style>
 
   <script>
+    $(document).ready(function() {
+      // 페이지 로드 시 데이터 가져오기
+      const postId = getPostIdFromURL();
+      if (postId) {
+        fetchPostData(postId);
+      }
+    });
+    function getPostIdFromURL() {
+      // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
+      const url = window.location.href;
+      const parts = url.split("/");
+      const idIndex = parts.findIndex(part => part === "post") + 1;
+      if (idIndex < parts.length) {
+        return parts[idIndex];
+      }
+      return null;
+    }
+
+    function fetchPostData(postId) {
+      // AJAX 요청을 통해 게시물 데이터 가져오기
+      $.ajax({
+        url: `/api/post/${postId}`,
+        type: "GET",
+        success: function(data) {
+          // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
+          displayPostData(data);
+        },
+        error: function() {
+          // 요청이 실패했을 때 실행되는 콜백 함수
+          console.error("Failed to fetch post data.");
+        }
+      });
+    }
+
+    function displayPostData(data) {
+      // 게시물 데이터를 HTML에 표시하는 함수
+      const imageElement = $(".imagebox");
+      const titleElement = $(".detail-title");
+      const contentElement = $(".detail-content");
+      // const createdAtElement = $(".time");
+
+      // 데이터를 각각의 요소에 적절히 표시
+      titleElement.text(data.title);
+      contentElement.text(data.content);
+      imageElement.css("background-image", `url(${data.image})`);
+      // createdAtElement.text(data.timestamp);
+    }
+
+
+
     $(document).ready(function () {
       // 댓글 등록 버튼 클릭 이벤트
       $('.comment-submit').click(function () {
@@ -241,7 +291,7 @@
       commentBox.appendTo(commentWrapper);
       timestampDiv.appendTo(commentWrapper);
 
-      // Create edit and delete buttons
+// Create edit and delete buttons
       const editButton = $('<button class="edit-button">Edit</button>');
       const deleteButton = $('<button class="delete-button">Delete</button>');
 
