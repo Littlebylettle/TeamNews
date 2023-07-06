@@ -20,9 +20,9 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")    //회원가입
-    public String signupUser(@RequestBody  SignupRequestDto signupRequestDto) {
+    public String signupUser(@RequestBody SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
-        return "redirect:/api/user/login-page";
+        return "redirect:/api/user/login";
     }
 
     @ResponseBody

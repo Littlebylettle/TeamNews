@@ -1,13 +1,18 @@
 package com.sparta.teamnews.controller;
 
-import com.sparta.teamnews.security.UserDetailsImpl;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.sparta.teamnews.service.PostService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class HomeController {
+
+    private final PostService postService;
+
+    public HomeController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/")
     public String home() {
@@ -22,4 +27,11 @@ public class HomeController {
 
     @GetMapping("/api/user/mypage")
     public String myPage() { return "mypage";}
+
+
+    @GetMapping("api/post/{id}")       //게시글 단건 조회
+    public String getPost(@PathVariable Long id){
+        postService.getPost(id);
+        return "detail";
+    }
 }

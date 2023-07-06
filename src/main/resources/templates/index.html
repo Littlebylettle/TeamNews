@@ -47,7 +47,7 @@
         <!-- 게시글-->
         <div class="cards">
             <div id="cards" class="row row-cols-1 row-cols-md-5 g-5">
-                <div class="col">
+                <div class="col" id = 1 onclick="detail(1)">
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
                              class="card-img-top" alt="...">
@@ -62,33 +62,6 @@
                              class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
-                             class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">profilename</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
-                             class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">profilename</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
-                             class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Profilename</h5>
                         </div>
                     </div>
                 </div>
@@ -97,4 +70,43 @@
     </div>
 </div>
 </body>
+<script>
+    $.ajax({
+        url: '/api/post',
+        type: 'GET',
+        contentType: 'application/json',
+        headers: {
+            'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
+        },
+        success: function(response) {
+            // 서버에서 반환된 데이터를 동적으로 HTML에 추가
+            var postCards = $('#cards');
+
+            $('#cards').empty()
+            // 게시물 데이터를 반복하면서 카드를 생성하고 추가
+            response.forEach(function(post) {
+                var card = $('<div class="col" onclick="detail('+ post.id+ ')">' +
+                    '<div class="card h-100" >' +
+                    '<img src="' + post.image + '" class="card-img-top" alt="...">' +
+                    '<div class="card-body">' +
+                    '<h5 class="card-title">' + post.profilename + '</h5>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+
+                postCards.append(card);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+// 페이지 로드 시 전체 게시물을 가져와서 동적으로 추가
+    loadAllPosts();
+
+    function detail(id) {
+        window.location.href = '/api/post/' + id;
+    }
+
+</script>
 </html>

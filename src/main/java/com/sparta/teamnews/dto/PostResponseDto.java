@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 public class PostResponseDto {
     private Long id;
+    private String image;
     private String title;
     private String profilename;
     private String content;
@@ -23,6 +24,7 @@ public class PostResponseDto {
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
+        this.image = post.getImage();
         this.title = post.getTitle();
         this.profilename = post.getUser().getProfilename();
         this.content = post.getContent();
