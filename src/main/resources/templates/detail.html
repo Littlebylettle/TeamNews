@@ -2,492 +2,208 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-
-
-  <title>TodayOutfitDetail</title>
-
-  <style>
-    * {
-      font-family: SpoqaHanSansNeo;
-    }
-    body {
-      width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header {
-      position: fixed;
-      top: 0px;
-      background-color: white;
-      width: auto;
-      height: 150px;
-      display: flex;
-      margin: 0px;
-      z-index: 30;
-    }
-
-    #header-title-select-shop {
-      color: #252525;
-      margin-top: 30px;
-      font-size: 50px;
-      margin-left: 30px;
-      letter-spacing: 1.1px;
-      font-family: SpoqaHanSansNeo;
-      font-size: 70px;
-      font-weight: bold;
-    }
-
-    .header2 {
-      height: 35px;
-      margin-left: 30px;
-      margin-right: 30px;
-      display: flex;
-      justify-content: right;
-      margin-bottom: 5px;
-    }
-    .update {
-      padding: 5px 10px;
-      height: 35px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .delete {
-      margin-left: 5px;
-      padding: 5px 10px;
-      height: 35px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .main {
-      height: 600px;
-      width: auto;
-      margin-left: 30px;
-      margin-right: 30px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      border-radius: 1%;
-    }
-    .time {
-      font-size: 20px;
-      color: #252525;
-      width: 500px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: right;
-
-    }
-    .imagebox {
-      height: 500px;
-      width: 500px;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      background-image: url('data:image/jpeg;base64,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');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border-radius: 1%;
-    }
-    .detail {
-      height: 500px;
-      width: 500px;
-
-    }
-    .detail-title {
-      width: 500px;
-      height: 60px;
-      border: solid;
-      border-color: #252525;
-      box-sizing: border-box;
-      border-radius: 1%;
-      font-size: 25px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .detail-content{
-      margin-top: 100px;
-      width: 500px;
-      height: 340px;
-      border: solid;
-      border-color: #252525;
-      border-radius: 1%;
-      box-sizing: border-box;
-      font-size: 25px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: scroll;
-    }
-
-
-    .comment-input-wrapper {
-      width: auto;
-      margin-top: 10px;
-      margin-left: 30px;
-      margin-right: 30px;
-      border: solid;
-      border-color: #252525;
-      border-radius: 1%;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-
-    }
-    .comment-box {
-      display: flex;
-      justify-content: space-between;
-      margin-right: 5px;
-    }
-
-    .comment-box .buttons-container {
-      display: flex;
-      gap: 5px;
-    }
-
-    .comment-input-wrapper .comment-box {
-      flex: 1; /* 수정된 부분: comment-box 영역이 남은 공간을 차지하도록 설정 */
-    }
-
-    .comment-input-wrapper .timestamp {
-      text-align: right; /* 수정된 부분: 오른쪽 정렬 */
-      margin-right: 5px;
-    }
-    .profilename {
-      width: 100px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-    }
-    .update2 {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .delete2 {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .comment-input {
-      flex: 1;
-      height: 100%;
-      border: none;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 1%;
-      align-items: center;
-    }
-
-    .comment-submit {
-      padding: 5px 10px;
-      height: 52px;
-      background-color: #252525;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .comment-result {
-      flex: 1;
-      height: 100%;
-      border: none;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 1%;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-  </style>
-
-  <script>
-    // $(document).ready(function() {
-    //   // 페이지 로드 시 데이터 가져오기
-    //   const postId = getPostIdFromURL();
-    //   if (postId) {
-    //     fetchPostData(postId);
-    //   }
-    // });
-    // function getPostIdFromURL() {
-    //   // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
-    //   const url = window.location.href;
-    //   const parts = url.split("/");
-    //   const idIndex = parts.findIndex(part => part === "post") + 1;
-    //   if (idIndex < parts.length) {
-    //     return parts[idIndex];
-    //   }
-    //   return null;
-    // }
-    //
-    // function fetchPostData(postId) {
-    //   // AJAX 요청을 통해 게시물 데이터 가져오기
-    //   $.ajax({
-    //     url: `/api/post/${postId}`,
-    //     type: "GET",
-    //     success: function(data) {
-    //       // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
-    //       displayPostData(data);
-    //     },
-    //     error: function() {
-    //       // 요청이 실패했을 때 실행되는 콜백 함수
-    //       console.error("Failed to fetch post data.");
-    //     }
-    //   });
-    // }
-    //
-    // function displayPostData(data) {
-    //   // 게시물 데이터를 HTML에 표시하는 함수
-    //   const imageElement = $(".imagebox");
-    //   const titleElement = $(".detail-title");
-    //   const contentElement = $(".detail-content");
-    //   // const createdAtElement = $(".time");
-    //
-    //   // 데이터를 각각의 요소에 적절히 표시
-    //   titleElement.text(data.title);
-    //   contentElement.text(data.content);
-    //   imageElement.css("background-image", `url(${data.image})`);
-    //   // createdAtElement.text(data.timestamp);
-    // }
-    //
-
-    //
-    // $(document).ready(function () {
-    //   // 댓글 등록 버튼 클릭 이벤트
-    //   $('.comment-submit').click(function () {
-    //     const comment = $('.comment-input').val();
-    //     if (comment !== '') {
-    //       const timestamp = getTimestamp();
-    //       addComment(comment, timestamp);
-    //       $('.comment-input').val('');
-    //     }
-    //   });
-    // });
-    // function addComment(comment, timestamp) {
-    //   const commentWrapper = $('<div class="comment-input-wrapper"></div>');
-    //   const profileName = $('<div class="profilename">profilename</div>');
-    //   const commentText = $('<div class="comment-text"></div>').text(comment);
-    //   const timestampDiv = $('<div class="timestamp"></div>').text(timestamp);
-    //   const commentBox = $('<div class="comment-box"></div>');
-    //   commentText.appendTo(commentBox);
-    //   profileName.appendTo(commentWrapper);
-    //   commentBox.appendTo(commentWrapper);
-    //   timestampDiv.appendTo(commentWrapper);
-    //
-    //   // Create edit and delete buttons
-    //   const editButton = $('<button class="edit-button">Edit</button>');
-    //   const deleteButton = $('<button class="delete-button">Delete</button>');
-    //
-    //   // 버튼을 가로로 나란히 표시하기 위해 commentBox 내부에 버튼을 추가
-    //   const buttonsContainer = $('<div class="buttons-container"></div>');
-    //   editButton.appendTo(buttonsContainer);
-    //   deleteButton.appendTo(buttonsContainer);
-    //   buttonsContainer.appendTo(commentBox);
-    //
-    //   // 수정 버튼 클릭 이벤트 핸들러
-    //   editButton.click(function() {
-    //     const newComment = prompt('댓글을 수정하세요:', comment);
-    //     if (newComment !== null) {
-    //       commentText.text(newComment);
-    //       timestampDiv.text(getTimestamp());
-    //     }
-    //   });
-    //
-    //   // 삭제 버튼 클릭 이벤트 핸들러
-    //   deleteButton.click(function() {
-    //     commentWrapper.remove();
-    //   });
-    //
-    //   commentWrapper.appendTo('#comments-container');
-    // }
-
-    function getTimestamp() {
-      const now = new Date();
-      const year = now.getFullYear().toString();
-      const month = (now.getMonth() + 1).toString().padStart(2, '0');
-      const day = now.getDate().toString().padStart(2, '0');
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
-
-      return timestamp;
-    }
-  </script>
-
+    <title>TodayOutfitDetail</title>
 </head>
 
 <body>
 <!-- 헤더 -->
 <div class="header" style="position:static;">
-  <div id="header-title-select-shop">
-    Today Outfit
-  </div>
+    <div id="header-title-select-shop">
+        Today Outfit
+    </div>
 </div>
 <!-- 헤더 -->
 <!-- 헤더2 -->
 <div class="header2">
-  <button class="update">Edit</button>
-  <button class="delete">Delete</button>
+    <button class="update">Edit</button>
+    <button class="delete">Delete</button>
 </div>
 <!-- 헤더2 -->
 <!-- 메인 -->
 <div class="main">
-  <div class = "imagebox" style="width: 500px; height: 500px;"></div>
-  <div class = "detail">
-    <div class = "detail-title">300보고 Feel 꽂힌 출근 룩</div>
-    <div class = "detail-content"> </div>
-    <div class = "time"> 2023-07-06 09:00 </div>
-    <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
-  </div>
+    <div class="imagebox" style="width: 500px; height: 500px;"></div>
+    <div class="detail">
+        <div class="detail-title">300보고 Feel 꽂힌 출근 룩</div>
+        <div class="detail-content"></div>
+        <div class="time"> 2023-07-06 09:00</div>
+        <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
+    </div>
 </div>
 <!-- 메인 -->
 
 <!-- 댓글 -->
 <div class="comment-input-wrapper">
-<!--  <div class="profilename">profilename</div>-->
-  <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
-  <button class="comment-submit" onclick="onComment()">등록</button>
+    <!--  <div class="profilename">profilename</div>-->
+    <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
+    <button class="comment-submit" onclick="onComment()">등록</button>
 </div>
-<!-- 댓글 -->
-<div class="comment-input-wrapper">
-  <div class="profilename">profilename</div>
-  <div class="comment-input" >ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-  <div class="header3">
-    <button class="update2" onclick="editComment()">Edit</button>
-    <button class="delete2" onclick="deleteComment()">Delete</button>
-  </div>
-</div>
-
-<!-- 댓글 목록 영역 -->
-<div id="comments-container"></div>
-
+<div class="comment-container">
+    <!-- 댓글 -->
+    <div class="comment-input-wrapper">
+        <div class="profilename">profilename</div>
+        <div class="comment-input">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+        <div class="header3">
+            <button class="update2" onclick="editComment()">Edit</button>
+            <button class="delete2" onclick="deleteComment()">Delete</button>
+        </div>
+    </div>
 </div>
 
 </body>
 <script>
-  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
-  $(document).ready(function() {
+    $(document).ready(function () {
 
-      $.ajax({
-        url: `/api/post/${postnum}`,
-        type: "GET",
-        contentType: 'application/json',
-        headers: {
-          'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
-        },
-        success: function(response) {
-          $('.imagebox').html('<img src=' + response.savedPath + '>');
-          $('.detail-title').text(response.title);
-          $('.detail-content').text(response.content);
-          $('.time').text(response.createdAt);
-        },
-        error: function(xhr, status, error) {
-          console.error(error);
-        }
-      });
-  })
-
-  function onComment() {
-    let body = $('#comment-submit').val();
-    let postId = parseInt(postnum, 10);// postnum을 문자열에서 long으로 변환
-    let authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8080/api/comment",
-      contentType: "application/json",
-      data: JSON.stringify({postId: postId ,body: body}),
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        console.log(response);
-
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        alert("실패")
-        // 요청 실패 시 처리할 로직
-      }
     });
-  }
 
-  function editComment() {
-    $.ajax({
-      type: "PUT",
-      url: `/api/comment/${postnum}`,
-      contentType: "application/json",
-      data: JSON.stringify({}),
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-      }
-    })
-  }
+    function getTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear().toString();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const timestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
 
-  function deleteComment() {
-    $.ajax({
-      type: "DELETE",
-      url: `/api/comment/{id}`,
-      contentType: "application/json",
-      data: JSON.stringify({}),
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("댓글 작성 완료")
-        window.location.reload(); //새로고침
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-      }
+        return timestamp;
+    }
+
+    let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: `/api/post/${postnum}`,
+            type: "GET",
+            contentType: 'application/json',
+            headers: {
+                'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
+            },
+            success: function (response) {
+                $('.imagebox').html('<img src=' + response.savedPath + '>');
+                $('.detail-title').text(response.title);
+                $('.detail-content').text(response.content);
+                $('.time').text(response.createdAt);
+
+                // var commentBox = $('.comment-input-wrapper');
+                $('.comment-container').empty();
+
+                let commentList = response.comment;
+
+                commentList.forEach(function (comment) {
+                    console.log(comment)
+
+                    var box = `<div class="comment-input-wrapper">
+                                    <div class="profilename">${comment.profilename}</div>
+                                    <textarea class="comment-input" id="input${comment.id}" readonly>${comment.body}</textarea>
+                                    <div class="header2">
+                                        <button class="update2" onclick="confirmEdit(this)" id="confirm${comment.id}" value="${comment.id}" style="display: none">Confirm</button>
+                                        <button class="update2" onclick="editComment(this)" id="edit${comment.id}" value="${comment.id}">Edit</button>
+                                        <button class="delete2" onclick="deleteComment(this)" id="delete${comment.id}"  value="${comment.id}">Delete</button>
+                                    </div>
+                                </div>`;
+
+                    $('.comment-container').append(box);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
     })
-  }
+
+    function onComment() {
+        let authCookie = Cookies.get("Authorization");
+
+        let body = $('#comment-submit').val();
+        let postId = parseInt(postnum, 10);
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            url: "/api/comment",
+
+            data: JSON.stringify({postId: postId, body: body}),
+            headers: {
+                'Authorization': authCookie
+            },
+        })
+            .done(function () {
+                    alert('댓글 등록 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 등록 뭔가 잘못되었습니다...');
+            });
+    }
+
+    function editComment(button) {
+        let commentnum = button.value;
+        $('#edit' + commentnum).hide()
+        $('#confirm' + commentnum).show()
+        document.getElementById(`input${commentnum}`).readOnly = false;
+    }
+
+    function confirmEdit(button) {
+        let authCookie = Cookies.get("Authorization");
+
+        let commentnum = parseInt(button.value, 10);
+        let body = $('#input' + commentnum).val();
+
+        $.ajax({
+            type: "PUT",
+            contentType: 'application/json',
+            url: `/api/comment/${commentnum}`,
+            data: JSON.stringify({body: body}),
+            headers: {
+                'Authorization': authCookie
+            },
+        })
+            .done(function () {
+                    alert('댓글 수정 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 수정 뭔가 잘못되었습니다...');
+            });
+    }
+
+    function deleteComment(button) {
+        let authCookie = Cookies.get("Authorization");
+
+        let commentnum = parseInt(button.value, 10);
+
+        $.ajax({
+            type: "DELETE",
+            contentType: 'application/json',
+            url: `/api/comment/${commentnum}`,
+            headers: {
+                'Authorization': authCookie
+            },
+        })
+            .done(function () {
+                    alert('댓글 삭제 잘 되었습니다...');
+                    window.location.reload();
+                }
+            )
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log('statusCode: ' + xhr.status);
+                alert('댓글 삭제 뭔가 잘못되었습니다...');
+            });
+    }
 </script>
 
 </html>
