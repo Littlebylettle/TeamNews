@@ -233,104 +233,104 @@
   </style>
 
   <script>
-    $(document).ready(function() {
-      // 페이지 로드 시 데이터 가져오기
-      const postId = getPostIdFromURL();
-      if (postId) {
-        fetchPostData(postId);
-      }
-    });
-    function getPostIdFromURL() {
-      // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
-      const url = window.location.href;
-      const parts = url.split("/");
-      const idIndex = parts.findIndex(part => part === "post") + 1;
-      if (idIndex < parts.length) {
-        return parts[idIndex];
-      }
-      return null;
-    }
+    // $(document).ready(function() {
+    //   // 페이지 로드 시 데이터 가져오기
+    //   const postId = getPostIdFromURL();
+    //   if (postId) {
+    //     fetchPostData(postId);
+    //   }
+    // });
+    // function getPostIdFromURL() {
+    //   // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
+    //   const url = window.location.href;
+    //   const parts = url.split("/");
+    //   const idIndex = parts.findIndex(part => part === "post") + 1;
+    //   if (idIndex < parts.length) {
+    //     return parts[idIndex];
+    //   }
+    //   return null;
+    // }
+    //
+    // function fetchPostData(postId) {
+    //   // AJAX 요청을 통해 게시물 데이터 가져오기
+    //   $.ajax({
+    //     url: `/api/post/${postId}`,
+    //     type: "GET",
+    //     success: function(data) {
+    //       // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
+    //       displayPostData(data);
+    //     },
+    //     error: function() {
+    //       // 요청이 실패했을 때 실행되는 콜백 함수
+    //       console.error("Failed to fetch post data.");
+    //     }
+    //   });
+    // }
+    //
+    // function displayPostData(data) {
+    //   // 게시물 데이터를 HTML에 표시하는 함수
+    //   const imageElement = $(".imagebox");
+    //   const titleElement = $(".detail-title");
+    //   const contentElement = $(".detail-content");
+    //   // const createdAtElement = $(".time");
+    //
+    //   // 데이터를 각각의 요소에 적절히 표시
+    //   titleElement.text(data.title);
+    //   contentElement.text(data.content);
+    //   imageElement.css("background-image", `url(${data.image})`);
+    //   // createdAtElement.text(data.timestamp);
+    // }
+    //
 
-    function fetchPostData(postId) {
-      // AJAX 요청을 통해 게시물 데이터 가져오기
-      $.ajax({
-        url: `/api/post/${postId}`,
-        type: "GET",
-        success: function(data) {
-          // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
-          displayPostData(data);
-        },
-        error: function() {
-          // 요청이 실패했을 때 실행되는 콜백 함수
-          console.error("Failed to fetch post data.");
-        }
-      });
-    }
-
-    function displayPostData(data) {
-      // 게시물 데이터를 HTML에 표시하는 함수
-      const imageElement = $(".imagebox");
-      const titleElement = $(".detail-title");
-      const contentElement = $(".detail-content");
-      // const createdAtElement = $(".time");
-
-      // 데이터를 각각의 요소에 적절히 표시
-      titleElement.text(data.title);
-      contentElement.text(data.content);
-      imageElement.css("background-image", `url(${data.image})`);
-      // createdAtElement.text(data.timestamp);
-    }
-
-
-
-    $(document).ready(function () {
-      // 댓글 등록 버튼 클릭 이벤트
-      $('.comment-submit').click(function () {
-        const comment = $('.comment-input').val();
-        if (comment !== '') {
-          const timestamp = getTimestamp();
-          addComment(comment, timestamp);
-          $('.comment-input').val('');
-        }
-      });
-    });
-    function addComment(comment, timestamp) {
-      const commentWrapper = $('<div class="comment-input-wrapper"></div>');
-      const profileName = $('<div class="profilename">profilename</div>');
-      const commentText = $('<div class="comment-text"></div>').text(comment);
-      const timestampDiv = $('<div class="timestamp"></div>').text(timestamp);
-      const commentBox = $('<div class="comment-box"></div>');
-      commentText.appendTo(commentBox);
-      profileName.appendTo(commentWrapper);
-      commentBox.appendTo(commentWrapper);
-      timestampDiv.appendTo(commentWrapper);
-
-      // Create edit and delete buttons
-      const editButton = $('<button class="edit-button">Edit</button>');
-      const deleteButton = $('<button class="delete-button">Delete</button>');
-
-      // 버튼을 가로로 나란히 표시하기 위해 commentBox 내부에 버튼을 추가
-      const buttonsContainer = $('<div class="buttons-container"></div>');
-      editButton.appendTo(buttonsContainer);
-      deleteButton.appendTo(buttonsContainer);
-      buttonsContainer.appendTo(commentBox);
-
-      // 수정 버튼 클릭 이벤트 핸들러
-      editButton.click(function() {
-        const newComment = prompt('댓글을 수정하세요:', comment);
-        if (newComment !== null) {
-          commentText.text(newComment);
-          timestampDiv.text(getTimestamp());
-        }
-      });
-
-      // 삭제 버튼 클릭 이벤트 핸들러
-      deleteButton.click(function() {
-        commentWrapper.remove();
-      });
-
-      commentWrapper.appendTo('#comments-container');
-    }
+    //
+    // $(document).ready(function () {
+    //   // 댓글 등록 버튼 클릭 이벤트
+    //   $('.comment-submit').click(function () {
+    //     const comment = $('.comment-input').val();
+    //     if (comment !== '') {
+    //       const timestamp = getTimestamp();
+    //       addComment(comment, timestamp);
+    //       $('.comment-input').val('');
+    //     }
+    //   });
+    // });
+    // function addComment(comment, timestamp) {
+    //   const commentWrapper = $('<div class="comment-input-wrapper"></div>');
+    //   const profileName = $('<div class="profilename">profilename</div>');
+    //   const commentText = $('<div class="comment-text"></div>').text(comment);
+    //   const timestampDiv = $('<div class="timestamp"></div>').text(timestamp);
+    //   const commentBox = $('<div class="comment-box"></div>');
+    //   commentText.appendTo(commentBox);
+    //   profileName.appendTo(commentWrapper);
+    //   commentBox.appendTo(commentWrapper);
+    //   timestampDiv.appendTo(commentWrapper);
+    //
+    //   // Create edit and delete buttons
+    //   const editButton = $('<button class="edit-button">Edit</button>');
+    //   const deleteButton = $('<button class="delete-button">Delete</button>');
+    //
+    //   // 버튼을 가로로 나란히 표시하기 위해 commentBox 내부에 버튼을 추가
+    //   const buttonsContainer = $('<div class="buttons-container"></div>');
+    //   editButton.appendTo(buttonsContainer);
+    //   deleteButton.appendTo(buttonsContainer);
+    //   buttonsContainer.appendTo(commentBox);
+    //
+    //   // 수정 버튼 클릭 이벤트 핸들러
+    //   editButton.click(function() {
+    //     const newComment = prompt('댓글을 수정하세요:', comment);
+    //     if (newComment !== null) {
+    //       commentText.text(newComment);
+    //       timestampDiv.text(getTimestamp());
+    //     }
+    //   });
+    //
+    //   // 삭제 버튼 클릭 이벤트 핸들러
+    //   deleteButton.click(function() {
+    //     commentWrapper.remove();
+    //   });
+    //
+    //   commentWrapper.appendTo('#comments-container');
+    // }
 
     function getTimestamp() {
       const now = new Date();
@@ -375,14 +375,14 @@
 
 <!-- 댓글 -->
 <div class="comment-input-wrapper">
-  <div class="profilename">profilename</div>
-  <textarea class="comment-input" placeholder="댓글을 입력하세요"></textarea>
-  <button class="comment-submit" id="comment-submit" onclick="onComment()">등록</button>
+<!--  <div class="profilename">profilename</div>-->
+  <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
+  <button class="comment-submit" onclick="onComment()">등록</button>
 </div>
 <!-- 댓글 -->
 <div class="comment-input-wrapper">
   <div class="profilename">profilename</div>
-  <div class="comment-input" ></div>
+  <div class="comment-input" >ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
   <div class="header3">
     <button class="update2" onclick="editComment()">Edit</button>
     <button class="delete2" onclick="deleteComment()">Delete</button>
@@ -407,7 +407,6 @@
           'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
         },
         success: function(response) {
-          console.log(response);
           $('.imagebox').html('<img src="' + response.image + '">');
           $('.detail-title').text(response.title);
           $('.detail-content').text(response.content);
@@ -418,29 +417,28 @@
         }
       });
   })
-    // URL에서 포스트 ID를 추출하는 함수
-  // function getPostIdFromUrl() {
-  //   let url = window.location.href;
-  //   let postId = url.substring(url.lastIndexOf("/") + 1);
-  //   return postId;
-  // }
+
   function onComment() {
     let body = $('#comment-submit').val();
-    console.log(typeof postnum);
+    let postId = parseInt(postnum, 10);// postnum을 문자열에서 long으로 변환
+    let authCookie = Cookies.get("Authorization");
     $.ajax({
       type: "POST",
-      url: `/api/comment`,
+      url: "http://localhost:8080/api/comment",
       contentType: "application/json",
-      data: JSON.stringify({postId: postnum ,body: body}),
+      data: JSON.stringify({postId: postId ,body: body}),
       headers: {
         'Authorization': authCookie
       },
       success: function (response) {
+        console.log(response);
+
         // 요청 성공 시 처리할 로직
         alert("댓글 작성 완료")
         window.location.reload(); //새로고침
       },
       error: function (xhr, status, error) {
+        alert("실패")
         // 요청 실패 시 처리할 로직
       }
     });
