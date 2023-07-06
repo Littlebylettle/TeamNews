@@ -2,8 +2,9 @@ package com.sparta.teamnews.controller;
 
 import com.sparta.teamnews.service.PostService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -23,23 +24,23 @@ public class HomeController {
     public String loginPage() { return "login";}
 
     @GetMapping("/api/user/signup")
-    public String signupPage() {
-        return "signup";
-    }
+    public String signupPage() { return "signup";}
 
     @GetMapping("/api/user/mypage")
     public String myPage() { return "mypage";}
+
+    @GetMapping("api/board")       //게시글 단건 조회
+    public String getPost(Model model, @RequestParam("postnum") Long id){
+        postService.getPost(id);
+        model.addAttribute("postnum", id);
+        return "detail";
+    }
+    @GetMapping("/api/user/new-post")
+    public String newPostPage() { return "newpost";}
 
     @GetMapping("/api/user/passwordchange")
     public String passwordChange() {
         return "passwordchange";
     }
 
-    @GetMapping("api/post/{id}")       //게시글 단건 조회
-    public String getPost(@PathVariable Long id){
-        postService.getPost(id);
-        return "detail";
-    }
-    @GetMapping("/api/user/new-post")
-    public String newPostPage() { return "newpost";}
 }
