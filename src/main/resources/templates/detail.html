@@ -49,6 +49,7 @@
 
     .header2 {
       height: 35px;
+      margin-top: 5px;
       margin-left: 30px;
       margin-right: 30px;
       display: flex;
@@ -149,6 +150,7 @@
       margin-top: 10px;
       margin-left: 30px;
       margin-right: 30px;
+      margin-bottom: 30px;
       border: solid;
       border-color: #252525;
       border-radius: 1%;
@@ -186,7 +188,22 @@
       justify-content: center;
 
     }
-
+    .update2 {
+      padding: 5px 10px;
+      height: 52px;
+      background-color: #252525;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .delete2 {
+      padding: 5px 10px;
+      height: 52px;
+      background-color: #252525;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
     .comment-input {
       flex: 1;
       height: 100%;
@@ -204,15 +221,6 @@
       color: white;
       border: none;
       cursor: pointer;
-    }
-
-    .comment-result {
-      flex: 1;
-      height: 100%;
-      border: none;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 1%;
     }
 
   </style>
@@ -364,8 +372,17 @@
   <button class="comment-submit">등록</button>
 </div>
 <!-- 댓글 -->
+<div class="comment-input-wrapper">
+  <div class="profilename">profilename</div>
+  <div class="comment-input" ></div>
+  <div class="header3">
+    <button class="update2">Edit</button>
+    <button class="delete2">Delete</button>
+  </div>
+</div>
+
 <!-- 댓글 목록 영역 -->
-<div id="comments-container"></div>
+
 
 </div>
 
