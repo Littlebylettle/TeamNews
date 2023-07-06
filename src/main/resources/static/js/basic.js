@@ -30,7 +30,6 @@ function getToken() {
     return auth;
 }
 // 같이 들어있던 좋아요 js
-
 const button = document.querySelector('#like');
 const counter = '#couter';
 let state = false;
