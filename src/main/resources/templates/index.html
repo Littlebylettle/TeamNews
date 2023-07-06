@@ -92,9 +92,6 @@
 
                 response.forEach(function(post) {
                     console.log(post.savedPath);
-
-                    // var obj = JSON.parse(post);
-                    // console.log(obj.title);
                     var card = '<div class="col" onclick="detail('+ post.id+ ')">' +
                         '<div class="card h-100" >' +
                         '<img referrerpolicy="no-referrer" src=' + post.savedPath + ' class="card-img-top" alt="...">' +
