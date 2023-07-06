@@ -19,4 +19,6 @@ public class HomeController {
 
     @GetMapping("/api/user/signup")
     public String signupPage() { return "signup";}
+    @GetMapping("/api/user/new-post")
+    public String newPostPage() { return "newpost";}
 }

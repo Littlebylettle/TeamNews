@@ -20,13 +20,17 @@
         <div class="uploadimage">
             <div class="postimage"></div>
         </div>
+
         <div class="input-box">
-            <input type="text" name="username" id="username" placeholder="  title" class="post-title">
+            <form action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">
+            <input type="text" name="title" id="title" placeholder="  title" class="post-title">
             <br><br>
-            <!-- <div class="login-id-label"></div> -->
-            <input type="text" name="username" id="username" placeholder="  contents" class="post-comment">
+            <input type="text" name="content" id="content" placeholder="  contents" class="post-comment">
+            <h4>파일 업로드</h4>
+            <input type="file" name="file">
+            <button type="submit" id="post-id-submit">등록하기</button>
+            </form>
         </div>
-        <button id="post-id-submit" onclick="">등록하기</button>
 
     </div>
     </body>
