@@ -21,6 +21,7 @@
     <!-- 부트스트랩 -->
     <script src="/js/basic.js"></script>
     <title>TodayOutfit</title>
+
 </head>
 <body>
 <div class="header" style="position:fixed;">
@@ -49,21 +50,40 @@
         <!-- 게시글-->
         <div class="cards">
             <div id="cards" class="row row-cols-1 row-cols-md-5 g-5">
-                <div class="col" id = 1 onclick="detail(1)">
+                <div class="col" id = 1 >
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
                              class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
+                            <button class="like">
+                                <div class="icon">
+                                    <svg class="prime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="currentColor"
+                                              d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z">
+                                        </path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="currentColor"
+                                              d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="counter" id="couter"></div>
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100">
                         <img src="https://velog.velcdn.com/images/dltmdcjf9859/profile/fd86690a-6da4-4a0b-a48e-2eee9b681879/image.jpg"
-                             class="card-img-top" alt="...">
+                             class="card-img-top"  onclick="detail(1)" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">profilename</h5>
+                            <button class="like-button" onclick="toggleLike(this)">
+                                <span class="icon">❤</span>
+                                <span class="counter">0</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -91,6 +111,7 @@
                 // 게시물 데이터를 반복하면서 카드를 생성하고 추가
 
                 response.forEach(function(post) {
+
                     console.log(post.savedPath);
                     var card = '<div class="col" onclick="detail('+ post.id+ ')">' +
                         '<div class="card h-100" >' +
@@ -117,5 +138,52 @@
         window.location.href = '/api/board?postnum=' + id;
     }
 
+    function toggleLike(button) {
+        let authCookie = Cookies.get("Authorization");
+        let postId = $(button).closest('.card').find('.post-id').data('id');
+        console.log(postId);
+
+        if ($(button).hasClass('liked')) {
+            // 이미 좋아요 상태인 경우
+            $.ajax({
+                type: "DELETE",
+                url: `/post/like/${likeId}`,
+
+                contentType: "application/json",
+                headers: {
+                    'Authorization': authCookie
+                },
+                success: function(res) {
+
+                    // 성공 처리 로직
+                    $(button).removeClass('liked');
+
+                },
+                error: function(xhr, status, error) {
+                    // 에러 처리 로직
+                }
+            });
+        } else {
+            console.log("hi")
+            // 좋아요 상태가 아닌 경우
+            $.ajax({
+                type: "POST",
+                url: `api/post/${postId}/like`,
+                contentType: "application/json",
+                headers: {
+                    'Authorization': authCookie
+                },
+                success: function(res) {
+                    console.log("성공")
+                    // 성공 처리 로직
+                    $(button).addClass('liked');
+                },
+                error: function(xhr, status, error) {
+                    console.log("실패")
+                    // 에러 처리 로직
+                }
+            });
+        }
+    }
 </script>
 </html>
