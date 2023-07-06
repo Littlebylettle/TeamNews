@@ -5,14 +5,21 @@ import com.sparta.teamnews.dto.PostResponseDto;
 import com.sparta.teamnews.entity.Post;
 import com.sparta.teamnews.entity.User;
 import com.sparta.teamnews.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.RejectedExecutionException;
 
 @Service
 public class PostService {
+    @Value("${upload.path}")
+    String uploadPath;
     private final PostRepository postRepository;
     public PostService(PostRepository postRepository){
         this.postRepository = postRepository;
@@ -34,9 +41,34 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public PostResponseDto creatPost(PostRequestDto requestDto, User user) { //게시물 생성
 
-        Post post = postRepository.save(new Post(requestDto, user));
+    //게시물 생성
+    public PostResponseDto creatPost(String title,String content, User user, MultipartFile files) throws IOException {
+        if (files.isEmpty()) {
+            return null;    //이미지가 없을 때
+        }
+//         원래 파일 이름 추출
+        String origName = files.getOriginalFilename();
+
+        // 파일 이름으로 쓸 uuid 생성
+        String uuid = UUID.randomUUID().toString();
+
+        // 확장자 추출(ex : .png)
+        String extension = origName.substring(origName.lastIndexOf("."));
+
+        // uuid와 확장자 결합
+        String savedName = uuid + extension;
+
+        // 파일을 불러올 때 사용할 파일 경로
+        String savedPath = uploadPath + savedName;
+
+        files.transferTo(new File(savedPath));
+
+
+        Post post = new Post(title,content,origName,savedName,savedPath,user);
+
+
+        postRepository.save(post);
         return new PostResponseDto(post);
     }
 
@@ -48,7 +80,7 @@ public class PostService {
             throw new RejectedExecutionException();
         }
         post.setTitle(requestDto.getTitle());
-        post.setImage(requestDto.getImage());
+//        post.setImage(requestDto.getImage());
         post.setContent(requestDto.getContent());
 
         return new PostResponseDto(post);
