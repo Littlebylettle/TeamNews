@@ -19,6 +19,8 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
     @PostMapping("/user/signup")    //회원가입
     public String signupUser(@RequestBody SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
@@ -32,20 +34,29 @@ public class UserController {
         return new ApiResponseDto("로그인완료", HttpStatus.OK.value());
     }
 
+    @ResponseBody
     @PostMapping("/user/logout")    //로그아웃
     public UserResponseDto logoutUser(HttpServletRequest request) {
         return userService.logoutUser(request);
     }
 
-    @PutMapping("/profile/{id}")        //프로필정보 수정
-    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return userService.updateProfile(profileRequestDto, userDetails);
+    @ResponseBody
+    @GetMapping("/user/profile")
+    public UserResponseDto getProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.getProfile(userDetails);
     }
 
-    @PutMapping("/profile/password")       //비밀번호 수정
-    public UserResponseDto updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    @ResponseBody
+    @PutMapping("/user/profile")     //프로필정보 수정
+    public String updateProfile(@RequestBody ProfileRequestDto profileRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        userService.updateProfile(profileRequestDto, userDetails);
+        return "redirect:/api/user/mypage";
+    }
 
-
-        return userService.updatePassword(pwdRequestDto,userDetails);
+    @ResponseBody
+    @PutMapping("/user/profile/password")       //비밀번호 수정
+    public String updatePassword(@RequestBody PwdRequestDto pwdRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        userService.updatePassword(pwdRequestDto, userDetails);
+        return "redirect:/api/user/passwordchange";
     }
 }

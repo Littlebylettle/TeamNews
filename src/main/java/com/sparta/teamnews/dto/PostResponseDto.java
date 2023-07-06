@@ -1,9 +1,7 @@
 package com.sparta.teamnews.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sparta.teamnews.entity.Like;
 import com.sparta.teamnews.entity.Post;
-import com.sparta.teamnews.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

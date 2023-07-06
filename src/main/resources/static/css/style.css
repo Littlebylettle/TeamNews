@@ -46,7 +46,8 @@ body {
 }
 
 .card.h-100 {
-    border: 5px solid #252525; /* 테두리 두께와 색상 설정 */
+    border: 5px solid #252525;
+    /* 테두리 두께와 색상 설정 */
 }
 
 .card-body {
@@ -182,12 +183,39 @@ body {
 .login-input-box {
     border-width: 0;
 
+    padding-left: 10px;
     width: 370px !important;
     height: 52px;
     margin: 14px 0 0;
     border-radius: 5px;
     background-color: #E9ECEF;
 }
+
+.profile-box {
+    border-width: 0;
+
+    font-size: 20px;
+    padding: 10px;
+    width: 370px !important;
+    height: 30px;
+    margin: 14px 0 0;
+    border-radius: 5px;
+    background-color: #E9ECEF;
+    resize: none;
+}
+
+.profile-box[readonly] {
+    background-color: white;
+}
+
+.profile-box:focus {
+    outline: none;
+}
+
+#introduce {
+    height: 70px;
+}
+
 
 .login-id-label {
     /*width: 44.1px;*/
@@ -207,7 +235,7 @@ body {
     color: #212529;
 }
 
-#login-id-submit {
+.confirm-btn {
     border-width: 0;
     width: 393px;
     height: 62px;
