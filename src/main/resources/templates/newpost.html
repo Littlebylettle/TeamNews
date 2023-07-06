@@ -20,12 +20,12 @@
         
         <div class="uploadimage">
             <div class="postimage">
-                <input type="file" name="file" id="file" class="file" th:value="등록">
+                <input type="file" name="file" id="file" class="file" value="등록">
             </div>
         </div>
 
         <div class="input-box">
-<!--            <form id="form" action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">-->
+
             <input type="text" name="title" id="title" placeholder="  title" class="post-title">
             <br><br>
             <input type="text" name="content" id="content" placeholder="  contents" class="post-comment">
@@ -33,7 +33,7 @@
         </div>
         <div class="post-button">
             <button type="submit" onclick="onPost()" id="post-id-submit">등록하기</button>
-<!--            </form>-->
+
         </div>
     </div>
     </body>
@@ -41,8 +41,8 @@
 
         function onPost() {
 
-            var authCookie = Cookies.get("Authorization");
-            var formData = new FormData();
+            let authCookie = Cookies.get("Authorization");
+            let formData = new FormData();
             formData.append('title', $('#title').val());
             formData.append('content', $('#content').val());
             formData.append('file', $('input[type="file"]')[0].files[0]);
@@ -61,8 +61,6 @@
                     window.location.reload();
                 },
                 error: function(xhr, status, error) {
-                    alert("error");
-                    // 요청 실패 시 처리할 로직
                 }
             });
             window.location.href = '/';

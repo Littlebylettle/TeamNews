@@ -423,6 +423,27 @@
       });
   })
 
+  function deletePost() {
+    let authCookie = Cookies.get("Authorization");
+    $.ajax({
+      type: "DELETE",
+      url: `/api/post/${postnum}`,
+      contentType: "application/json",
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("게시물 삭제 완료")
+        window.location.href = "/";
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+        alert("게시물 삭제 실패")
+      }
+    })
+  }
+
   function onComment() {
     let body = $('#comment-submit').val();
     let postId = parseInt(postnum, 10);// postnum을 문자열에서 long으로 변환
@@ -447,6 +468,25 @@
         // 요청 실패 시 처리할 로직
       }
     });
+  }
+  function editComment() {
+    $.ajax({
+      type: "PUT",
+      url: `/api/comment/${postnum}`,
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("댓글 작성 완료")
+        window.location.reload(); //새로고침
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+      }
+    })
   }
   function BtnChange(){
     const btnElement = document.getElementById('editBtn');
@@ -490,12 +530,7 @@
               alert('게시글 수정 뭔가 잘못되었습니다...');
             });
   }
-  function deletePost(){
 
-  }
-  function editComment() {
-
-  }
 
   function deleteComment() {
     $.ajax({
