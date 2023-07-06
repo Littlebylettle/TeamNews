@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -19,6 +20,9 @@
             crossorigin="anonymous"></script>
     <!-- 부트스트랩 -->
     <script src="/js/basic.js"></script>
+
+  <title>TodayOutfitDetail</title>
+
 </head>
 <body2>
 <!-- 헤더 -->
@@ -36,6 +40,7 @@
 <!-- 헤더2 -->
 <!-- 메인 -->
 <div class="main">
+
     <div class="imagebox" style="width: 500px; height: 500px;"></div>
     <div class="detail">
         <div class="detail-title">300보고 Feel 꽂힌 출근 룩</div>
@@ -43,6 +48,9 @@
         <div class="time"> 2023-07-06 09:00</div>
         <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
     </div>
+
+
+
 </div>
 <!-- 메인 -->
 
@@ -72,6 +80,7 @@
 
 </body2>
 <script>
+
     function getTimestamp() {
         const now = new Date();
         const year = now.getFullYear().toString();
