@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <meta charset="UTF-8">
+    <title>새로운 게시글 작성</title>
+</head>
+
+<body>
+    <div class="newpost-box">
+        
+        <div class="uploadimage">
+            <div class="postimage"></div>
+        </div>
+
+        <div class="input-box">
+            <form action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">
+            <input type="text" name="title" id="title" placeholder="  title" class="post-title">
+            <br><br>
+            <input type="text" name="content" id="content" placeholder="  contents" class="post-comment">
+            <h4>파일 업로드</h4>
+            <input type="file" name="file">
+            <button type="submit" id="post-id-submit">등록하기</button>
+            </form>
+        </div>
+
+    </div>
+    </body>
+    <script>
+    </script>
+</html>
