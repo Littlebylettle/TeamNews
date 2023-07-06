@@ -16,6 +16,8 @@ $(document).ready(function () {
 })
 
 
+
+
 function logout() {
     // 토큰 삭제
     Cookies.remove('Authorization', {path: '/'});
