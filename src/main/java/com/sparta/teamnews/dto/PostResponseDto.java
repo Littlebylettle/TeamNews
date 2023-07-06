@@ -1,6 +1,7 @@
 package com.sparta.teamnews.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sparta.teamnews.entity.Like;
 import com.sparta.teamnews.entity.Post;
 import lombok.Getter;
 
@@ -18,6 +19,7 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private List<CommentResponseDto> comment;
+    private Integer like;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -30,6 +32,7 @@ public class PostResponseDto {
                 .stream()
                 .map(CommentResponseDto::new)
                 .toList();
+        this.like = post.getLikeList().size();
     }
 
     public PostResponseDto(Boolean success) {
