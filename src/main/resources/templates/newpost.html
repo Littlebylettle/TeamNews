@@ -17,23 +17,26 @@
 
 <body>
     <div class="newpost-box">
-        
+
         <div class="uploadimage">
-            <div class="postimage"></div>
+            <div class="postimage">
+                <input type="file" name="file" class="file">
+            </div>
         </div>
 
         <div class="input-box">
-<!--            <form id="form" action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">-->
-            <input type="text" name="title" id="title" placeholder="  title" class="post-title">
+            <!--            <form id="form" action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">-->
+            <input type="text" name="title" id="title" placeholder="   title" class="post-title">
             <br><br>
-            <input type="text" name="content" id="content" placeholder="  contents" class="post-comment">
-            <h4>파일 업로드</h4>
-            <input type="file" name="file">
-            <button onclick="onPost()" type="submit" id="post-id-submit">등록하기</button>
-<!--            </form>-->
+            <input type="text" name="content" id="content" placeholder="   contents" class="post-comment">
+            <!-- <h4>파일 업로드</h4> -->
+            <div class="post-button">
+                <button onclick="onPost()" type="submit" id="post-id-submit">등록하기</button>
+            </div>
+            <!-- </form> -->
         </div>
     </div>
-    </body>
+</body>
     <script>
         function onPost() {
             console.log("dddd");
