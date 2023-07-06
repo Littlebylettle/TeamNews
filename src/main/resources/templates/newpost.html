@@ -2,7 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -21,12 +20,12 @@
         
         <div class="uploadimage">
             <div class="postimage">
-                <input type="file" name="file" id="file" class="file" th:value="등록">
+                <input type="file" name="file" id="file" class="file" value="등록">
             </div>
         </div>
 
         <div class="input-box">
-<!--            <form id="form" action="http://localhost:8080/api/post" method="post" enctype="multipart/form-data">-->
+
             <input type="text" name="title" id="title" placeholder="  title" class="post-title">
             <br><br>
             <input type="text" name="content" id="content" placeholder="  contents" class="post-comment">
@@ -34,7 +33,7 @@
         </div>
         <div class="post-button">
             <button type="submit" onclick="onPost()" id="post-id-submit">등록하기</button>
-<!--            </form>-->
+
         </div>
     </div>
     </body>

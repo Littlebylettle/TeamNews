@@ -38,7 +38,7 @@ public class Post extends Timestamped{ //news 게시글 Entity
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE})
-    private List<Comment> LikeList = new ArrayList<>();
+    private List<Like> LikeList = new ArrayList<>();
 
 
     public Post(String title, String content, String orgNm,String savedNm, String savedPath ,User user) {
