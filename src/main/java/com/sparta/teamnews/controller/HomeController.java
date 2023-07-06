@@ -4,7 +4,6 @@ import com.sparta.teamnews.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -38,4 +37,10 @@ public class HomeController {
     }
     @GetMapping("/api/user/new-post")
     public String newPostPage() { return "newpost";}
+
+    @GetMapping("/api/user/passwordchange")
+    public String passwordChange() {
+        return "passwordchange";
+    }
+
 }

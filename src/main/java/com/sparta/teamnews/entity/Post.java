@@ -1,12 +1,8 @@
 package com.sparta.teamnews.entity;
 
-import com.sparta.teamnews.dto.PostRequestDto;
-import com.sparta.teamnews.dto.PostResponseDto;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
