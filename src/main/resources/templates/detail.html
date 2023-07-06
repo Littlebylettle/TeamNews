@@ -186,7 +186,22 @@
       justify-content: center;
 
     }
-
+    .update2 {
+      padding: 5px 10px;
+      height: 52px;
+      background-color: #252525;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .delete2 {
+      padding: 5px 10px;
+      height: 52px;
+      background-color: #252525;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
     .comment-input {
       flex: 1;
       height: 100%;
@@ -218,6 +233,56 @@
   </style>
 
   <script>
+    $(document).ready(function() {
+      // 페이지 로드 시 데이터 가져오기
+      const postId = getPostIdFromURL();
+      if (postId) {
+        fetchPostData(postId);
+      }
+    });
+    function getPostIdFromURL() {
+      // 현재 URL에서 게시물 ID를 추출하는 함수 (예: https://example.com/api/post/123 에서 123 추출)
+      const url = window.location.href;
+      const parts = url.split("/");
+      const idIndex = parts.findIndex(part => part === "post") + 1;
+      if (idIndex < parts.length) {
+        return parts[idIndex];
+      }
+      return null;
+    }
+
+    function fetchPostData(postId) {
+      // AJAX 요청을 통해 게시물 데이터 가져오기
+      $.ajax({
+        url: `/api/post/${postId}`,
+        type: "GET",
+        success: function(data) {
+          // 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
+          displayPostData(data);
+        },
+        error: function() {
+          // 요청이 실패했을 때 실행되는 콜백 함수
+          console.error("Failed to fetch post data.");
+        }
+      });
+    }
+
+    function displayPostData(data) {
+      // 게시물 데이터를 HTML에 표시하는 함수
+      const imageElement = $(".imagebox");
+      const titleElement = $(".detail-title");
+      const contentElement = $(".detail-content");
+      // const createdAtElement = $(".time");
+
+      // 데이터를 각각의 요소에 적절히 표시
+      titleElement.text(data.title);
+      contentElement.text(data.content);
+      imageElement.css("background-image", `url(${data.image})`);
+      // createdAtElement.text(data.timestamp);
+    }
+
+
+
     $(document).ready(function () {
       // 댓글 등록 버튼 클릭 이벤트
       $('.comment-submit').click(function () {
@@ -234,7 +299,6 @@
       const profileName = $('<div class="profilename">profilename</div>');
       const commentText = $('<div class="comment-text"></div>').text(comment);
       const timestampDiv = $('<div class="timestamp"></div>').text(timestamp);
-
       const commentBox = $('<div class="comment-box"></div>');
       commentText.appendTo(commentBox);
       profileName.appendTo(commentWrapper);
@@ -304,6 +368,7 @@
     <div class = "detail-title">300보고 Feel 꽂힌 출근 룩</div>
     <div class = "detail-content"> </div>
     <div class = "time"> 2023-07-06 09:00 </div>
+    <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
   </div>
 </div>
 <!-- 메인 -->
@@ -312,14 +377,98 @@
 <div class="comment-input-wrapper">
   <div class="profilename">profilename</div>
   <textarea class="comment-input" placeholder="댓글을 입력하세요"></textarea>
-  <button class="comment-submit">등록</button>
+  <button class="comment-submit" id="comment-submit" onclick="onComment()">등록</button>
 </div>
 <!-- 댓글 -->
+<div class="comment-input-wrapper">
+  <div class="profilename">profilename</div>
+  <div class="comment-input" ></div>
+  <div class="header3">
+    <button class="update2" onclick="editComment()">Edit</button>
+    <button class="delete2" onclick="deleteComment()">Delete</button>
+  </div>
+</div>
+
 <!-- 댓글 목록 영역 -->
 <div id="comments-container"></div>
 
 </div>
 
 </body>
+<script>
+  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+  $(document).ready(function() {
+
+      $.ajax({
+        url: `/api/post/${postnum}`,
+        type: "GET",
+        contentType: 'application/json',
+        headers: {
+          'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
+        },
+        success: function(response) {
+          console.log(response);
+          $('.imagebox').html('<img src="' + response.image + '">');
+          $('.detail-title').text(response.title);
+          $('.detail-content').text(response.content);
+          $('.time').text(response.createdAt);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+  })
+    // URL에서 포스트 ID를 추출하는 함수
+  // function getPostIdFromUrl() {
+  //   let url = window.location.href;
+  //   let postId = url.substring(url.lastIndexOf("/") + 1);
+  //   return postId;
+  // }
+  function onComment() {
+    let body = $('#comment-submit').val();
+    console.log(typeof postnum);
+    $.ajax({
+      type: "POST",
+      url: `/api/comment`,
+      contentType: "application/json",
+      data: JSON.stringify({postId: postnum ,body: body}),
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("댓글 작성 완료")
+        window.location.reload(); //새로고침
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+      }
+    });
+  }
+
+  function editComment() {
+
+  }
+
+  function deleteComment() {
+    $.ajax({
+      type: "DELETE",
+      url: `/api/comment/{id}`,
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      headers: {
+        'Authorization': authCookie
+      },
+      success: function (response) {
+        // 요청 성공 시 처리할 로직
+        alert("댓글 작성 완료")
+        window.location.reload(); //새로고침
+      },
+      error: function (xhr, status, error) {
+        // 요청 실패 시 처리할 로직
+      }
+    })
+  }
+</script>
 
 </html>
