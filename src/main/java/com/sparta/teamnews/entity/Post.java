@@ -35,6 +35,10 @@ public class Post extends Timestamped{ //news 게시글 Entity
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post")
+    private List<Comment> LikeList = new ArrayList<>();
+
+
     public Post(PostRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();

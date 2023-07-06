@@ -32,7 +32,6 @@ public class User {
     private String introduce;
 
 
-
     public User(String username, String password, String profilename, String introduce) {
         this.username = username;
         this.password = password;
