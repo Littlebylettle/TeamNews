@@ -1,0 +1,330 @@
+* {
+    font-family: 'Georgia', serif;
+}
+
+body {
+    margin: 0px;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    background-color: white;
+    width: auto;
+    height: 150px;
+    display: flex;
+    margin: 0px;
+    z-index: 30;
+    border-bottom: #121212;
+}
+
+#header-title-select-shop {
+    color: #252525;
+    margin-top: 30px;
+    font-size: 50px;
+    margin-left: 30px;
+    letter-spacing: 1.1px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.postbox {
+    margin-right: 30px;
+    position: absolute;
+    right: 0px;
+    top: 150px;
+}
+
+/* 게시글 */
+.cards {
+    width: auto;
+    margin-top: 70px;
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+.card.h-100 {
+    border: 5px solid #252525; /* 테두리 두께와 색상 설정 */
+}
+
+.card-body {
+    background-color: #252525;
+    color: white;
+    font-family: SpoqaHanSansNeo;
+}
+
+/* 게시글 */
+#new-text {
+    top: 48px;
+    right: 30px;
+    font-size: 25px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+}
+
+.optionButton {
+    position: absolute;
+    top: 30px;
+    right: 120px;
+    font-size: 20px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+}
+
+.loginAndLogout {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+}
+
+#login-form {
+    width: 538px;
+    height: 710px;
+    margin: 70px auto 141px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /*gap: 96px;*/
+    padding: 56px 0 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.15);
+    background-color: #FFFFFF;
+}
+
+#login-title {
+    width: 303px;
+    height: 32px;
+    /*margin: 56px auto auto auto;*/
+    flex-grow: 0;
+    font-family: SpoqaHanSansNeo;
+    font-size: 32px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    text-align: left;
+    color: #212529;
+}
+
+#login-kakao-btn {
+    border-width: 0;
+    margin: 96px 0 8px;
+    width: 393px;
+    height: 62px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /*margin: 0 0 8px;*/
+    padding: 11px 12px;
+    border-radius: 5px;
+    background-color: #FFD43B;
+    font-family: SpoqaHanSansNeo;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    color: #414141;
+}
+
+#login-id-btn {
+    width: 393px;
+    height: 62px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /*margin: 8px 0 0;*/
+    padding: 11px 12px;
+    border-radius: 5px;
+    border: solid 1px #212529;
+    background-color: #FFFFFF;
+    font-family: SpoqaHanSansNeo;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    color: #414141;
+}
+
+.login-input-box {
+    border-width: 0;
+
+    width: 370px !important;
+    height: 52px;
+    margin: 14px 0 0;
+    border-radius: 5px;
+    background-color: #E9ECEF;
+}
+
+.login-id-label {
+    /*width: 44.1px;*/
+    /*height: 16px;*/
+    width: 382px;
+    padding-left: 11px;
+    margin-top: 40px;
+    /*margin: 0 337.9px 14px 11px;*/
+    font-family: NotoSansCJKKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.8px;
+    text-align: left;
+    color: #212529;
+}
+
+#login-id-submit {
+    border-width: 0;
+    width: 393px;
+    height: 62px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0 0;
+    padding: 11px 12px;
+    border-radius: 5px;
+    background-color: #252525;
+
+    font-family: SpoqaHanSansNeo;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.alert-danger {
+    color: #721C24;
+    background-color: #F8D7DA;
+    border-color: #F5C6CB;
+}
+
+.alert {
+    width: 300px;
+    margin-top: 22px;
+    padding: 1.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.newpost-box {
+    /* background-color: #FFD43B; */
+    width: 1100px;
+    height: 530px;
+    margin: 70px auto;
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.15);
+    background-color: #FFFFFF;
+    padding: 56px 20px 0px 50px;
+    border-radius: 10px;
+}
+
+.post-title {
+    border-width: 0;
+    
+    width: 450px !important;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #E9ECEF;
+    
+}
+
+.post-comment {
+    border-width: 0;
+    
+    width: 450px !important;
+    height: 340px;
+    margin: 14px 0 0;
+    border-radius: 5px;
+    background-color: #E9ECEF;
+    
+}
+
+.input-box{
+    /* background-color: #77b1a6; */
+    float: right;
+    padding-right: 30px;
+}
+
+#post-id-submit {
+    border-width: 0;
+    width: 170px;
+    height: 50px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 460px 455px ;
+    padding: 5px 12px;
+    border-radius: 5px;
+    background-color: #252525;
+    cursor: pointer;
+
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.uploadimage {
+    /* background-color: #b2545e; */
+    width: 580px;
+    height: 430px;
+    border: 2px solid #252525;
+    float: left
+}
+.postimage {
+    width: 580px;
+    height: 430px;
+    box-sizing: border-box;
+    background-image: url('https://www.ccbk.co.kr/images/product/detail/product401.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
