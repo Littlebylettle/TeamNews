@@ -56,13 +56,14 @@
                 success: function(response) {
                     // 요청 성공 시 처리할 로직
                     alert("등록성공");
+
                     window.location.reload();
+
                 },
                 error: function(xhr, status, error) {
                 }
             });
             alert("야호");
-            window.location.href = '/';
         }
 
 
