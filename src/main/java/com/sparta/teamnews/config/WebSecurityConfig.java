@@ -64,7 +64,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/board/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/post/**").permitAll()
-                        .requestMatchers("/Users/hoon/img/**").permitAll()
+                        .requestMatchers("/Users/iseungchul/img/**").permitAll()
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
 //                        .anyRequest().permitAll() // 그 외 모든 요청 인증처리
         );

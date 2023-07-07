@@ -84,12 +84,12 @@
                 'Authorization': document.cookie // 클라이언트 쿠키의 값을 전달
             },
             success: function (response) {
-                $('.imagebox').html('<img src="' + response.image + '">');
+                $('.imagebox').html('<img src="' + response.savedPath + '">');
                 $('.detail-title').text(response.title);
                 $('.detail-content').text(response.content);
                 $('.time').text(response.createdAt);
 
-                // var commentBox = $('.comment-input-wrapper');
+
                 $('.comment-container').empty();
 
                 let commentList = response.comment;
