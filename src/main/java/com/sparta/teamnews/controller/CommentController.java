@@ -26,7 +26,7 @@ public class CommentController {
     }
 
     @ResponseBody
-    @PutMapping("/comment/{id}")            //댓글 수정
+    @PutMapping("/comment/{id}")            //댓글 수정 수정
     public void updateComment(@PathVariable Long id, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.updateComment(id, commentRequestDto, userDetails);
     }
