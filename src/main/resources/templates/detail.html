@@ -20,60 +20,60 @@
     <!-- 부트스트랩 -->
     <script src="/js/basic.js"></script>
 
-  <title>TodayOutfitDetail</title>
+    <title>TodayOutfitDetail</title>
 </head>
 <body2>
-<!-- 헤더 -->
-<div class="header" style="position:static;">
-    <div id="header-title-select-shop">
-        Today Outfit
-    </div>
-</div>
-<!-- 헤더 -->
-<!-- 헤더2 -->
-<div class="header2">
-
-  <button class="update" id="editBtn"  onclick="BtnChange() ">Edit</button>
-  <button class="delete" onclick="deletePost()">Delete</button>
-
-</div>
-<!-- 헤더2 -->
-<!-- 메인 -->
-<div class="main">
-
-  <div class = "imagebox" style="width: 500px; height: 500px;"></div>
-  <div class = "detail">
-    <textarea type="text" readonly class = "detail-title" name="title" id="title">300보고 Feel 꽂힌 출근 룩</textarea>
-    <textarea type="text" readonly class = "detail-content" name="content" id="content"> </textarea>
-    <div class = "time" name="modifiedTime" id="modifiedTime"> 2023-07-06 09:00 </div>
-    <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
-  </div>
-
-</div>
-<!-- 메인 -->
-
-
-<!-- 댓글 -->
-<div class="comment-input-wrapper">
-    <!--  <div class="profilename">profilename</div>-->
-    <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
-    <button class="comment-submit" onclick="onComment()">등록</button>
-</div>
-<div class="comment-container">
-    <!-- 댓글 -->
-    <div class="comment-input-wrapper">
-        <div class="profilename">profilename</div>
-        <div class="comment-input">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-        <div class="header3">
-            <button class="update2" onclick="editComment()">Edit</button>
-            <button class="delete2" onclick="deleteComment()">Delete</button>
+    <!-- 헤더 -->
+    <div class="header" style="position:static;">
+        <div id="header-title-select-shop">
+            Today Outfit
         </div>
     </div>
-</div>
+    <!-- 헤더 -->
+    <!-- 헤더2 -->
+    <div class="header2">
+
+        <button class="update" id="editBtn" onclick="BtnChange() ">Edit</button>
+        <button class="delete" onclick="deletePost()">Delete</button>
+
+    </div>
+    <!-- 헤더2 -->
+    <!-- 메인 -->
+    <div class="main">
+
+        <div class="imagebox" style="width: 500px; height: 500px;"></div>
+        <div class="detail">
+            <textarea type="text" readonly class="detail-title" name="title" id="title">300보고 Feel 꽂힌 출근 룩</textarea>
+            <textarea type="text" readonly class="detail-content" name="content" id="content"> </textarea>
+            <div class="time" name="modifiedTime" id="modifiedTime"> 2023-07-06 09:00</div>
+            <p id="targetIdParagraph" style="display: none;">targetId: <span th:text="${postnum}"></span></p>
+        </div>
+
+    </div>
+    <!-- 메인 -->
+
+
+    <!-- 댓글 -->
+    <div class="comment-input-wrapper">
+        <!--  <div class="profilename">profilename</div>-->
+        <textarea class="comment-input" id="comment-submit" placeholder="댓글을 입력하세요"></textarea>
+        <button class="comment-submit" onclick="onComment()">등록</button>
+    </div>
+    <div class="comment-container">
+        <!-- 댓글 -->
+        <div class="comment-input-wrapper">
+            <div class="profilename">profilename</div>
+            <div class="comment-input">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+            <div class="header3">
+                <button class="update2" onclick="editComment()">Edit</button>
+                <button class="delete2" onclick="deleteComment()">Delete</button>
+            </div>
+        </div>
+    </div>
 
 </body2>
 <script>
-  let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
+    let postnum = document.getElementById('targetIdParagraph').querySelector('span').innerText;
     $(document).ready(function () {
 
         $.ajax({
@@ -96,20 +96,13 @@
 
                 commentList.forEach(function (comment) {
                     console.log(comment)
-                    // var box = '<div className="comment-input-wrapper" id= "+ comment.id+")>' +
-                    //     '<div className="profilename">' + comment.profilename + '</div>' +
-                    //     '<div className="comment-input">' + comment.body + '</div>' +
-                    //     '<div className="header2">' +
-                    //     '<button className="update2" onClick="editComment()">Edit</button>' +
-                    //     '<button className="delete2" onClick="deleteComment()">Delete</button>' +
-                    //     '</div>' +
-                    //     '</div>';
-                    var box = `<div class="comment-input-wrapper" id="${comment.id}">
+                    var box = `<div class="comment-input-wrapper">
                                     <div class="profilename">${comment.profilename}</div>
-                                    <div class="comment-input">${comment.body}</div>
-                                    <div class="header3">
-                                        <button class="update2" onclick="editComment()">Edit</button>
-                                        <button class="delete2" onclick="deleteComment()">Delete</button>
+                                    <textarea class="comment-input" id="input${comment.id}" readonly>${comment.body}</textarea>
+                                    <div class="header2">
+                                        <button class="update2" onclick="confirmEdit(this)" id="confirm${comment.id}" value="${comment.id}" style="display: none">Confirm</button>
+                                        <button class="update2" onclick="editComment(this)" id="edit${comment.id}" value="${comment.id}">Edit</button>
+                                        <button class="delete2" onclick="deleteComment(this)" id="delete${comment.id}"  value="${comment.id}">Delete</button>
                                     </div>
                                 </div>`;
 
@@ -135,70 +128,70 @@
     }
 
 
-  function deletePost() {
-    let authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "DELETE",
-      url: `/api/post/${postnum}`,
-      contentType: "application/json",
-      headers: {
-        'Authorization': authCookie
-      },
-      success: function (response) {
-        // 요청 성공 시 처리할 로직
-        alert("게시물 삭제 완료")
-        window.location.href = "/";
-      },
-      error: function (xhr, status, error) {
-        // 요청 실패 시 처리할 로직
-        alert("게시물 삭제 실패")
-      }
-    })
-  }
-
-  function BtnChange(){
-    const btnElement = document.getElementById('editBtn');
-    var edit = "Edit";
-    console.log(btnElement.innerText+ "값");
-    if(btnElement.innerText === edit)
-    {
-      btnElement.innerText = 'Ok';
-      document.getElementById("title").readOnly = false;
-      document.getElementById("content").readOnly = false;
+    function deletePost() {
+        let authCookie = Cookies.get("Authorization");
+        $.ajax({
+            type: "DELETE",
+            url: `/api/post/${postnum}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': authCookie
+            },
+            success: function (response) {
+                // 요청 성공 시 처리할 로직
+                alert("게시물 삭제 완료")
+                window.location.href = "/";
+            },
+            error: function (xhr, status, error) {
+                // 요청 실패 시 처리할 로직
+                alert("게시물 삭제 실패")
+            }
+        })
     }
-    else{
-      btnElement.innerText = "Edit";
-      document.getElementById("title").readOnly = true;
-      document.getElementById("content").readOnly = true;
-      editPost()
-    }
-  }
 
-  function editPost(){
-    let modifytitle = $('#title').val();
-    let modifycontent = $('#content').val();
-    let modifiedTime = $('#modifiedTime').val();
-    var authCookie = Cookies.get("Authorization");
-    $.ajax({
-      type: "PUT",
-      url: `/api/post/${postnum}`,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({title: modifytitle, content: modifycontent,
-       modifiedAt:modifiedTime}),
-      headers: {
-        "Authorization": authCookie,
-      },
-    })
+    function BtnChange() {
+        const btnElement = document.getElementById('editBtn');
+        var edit = "Edit";
+        console.log(btnElement.innerText + "값");
+        if (btnElement.innerText === edit) {
+            btnElement.innerText = 'Ok';
+            document.getElementById("title").readOnly = false;
+            document.getElementById("content").readOnly = false;
+        } else {
+            btnElement.innerText = "Edit";
+            document.getElementById("title").readOnly = true;
+            document.getElementById("content").readOnly = true;
+            editPost()
+        }
+    }
+
+    function editPost() {
+        let modifytitle = $('#title').val();
+        let modifycontent = $('#content').val();
+        let modifiedTime = $('#modifiedTime').val();
+        var authCookie = Cookies.get("Authorization");
+        $.ajax({
+            type: "PUT",
+            url: `/api/post/${postnum}`,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                title: modifytitle, content: modifycontent,
+                modifiedAt: modifiedTime
+            }),
+            headers: {
+                "Authorization": authCookie,
+            },
+        })
             .done(function () {
-                      alert('게시글 수정 잘 되었습니다...');
-                      window.location.href = host + "/";
-                    }
+                    alert('게시글 수정 잘 되었습니다...');
+                    window.location.href = host + "/";
+                }
             )
             .fail(function (xhr, textStatus, errorThrown) {
-              console.log('statusCode: ' + xhr.status);
-              alert('게시글 수정 뭔가 잘못되었습니다...');
+                console.log('statusCode: ' + xhr.status);
+                alert('게시글 수정 뭔가 잘못되었습니다...');
             });
-  }
+    }
 
     function getTimestamp() {
         const now = new Date();
@@ -256,12 +249,12 @@
             type: "PUT",
             contentType: 'application/json',
             url: `/api/comment/${commentnum}`,
-          data: JSON.stringify({body: body}),
+            data: JSON.stringify({body: body}),
             headers: {
                 'Authorization': authCookie
             },
         })
-                      .done(function () {
+            .done(function () {
                     alert('댓글 수정 잘 되었습니다...');
                     window.location.reload();
                 }
