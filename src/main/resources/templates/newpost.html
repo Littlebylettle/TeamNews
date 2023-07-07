@@ -44,26 +44,23 @@
             formData.append('title', $('#title').val());
             formData.append('content', $('#content').val());
             formData.append('file', $('input[type="file"]')[0].files[0]);
-            // 3초 동안 기다림
-            setTimeout(function() {
-                $.ajax({
-                    url: 'http://localhost:8080/api/post',
-                    type: 'POST',
-                    headers: {
-                        'Authorization': authCookie
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // 요청 성공 시 처리할 로직
-                        alert("등록 성공");
-                        window.location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                    }
-                });
-            }, 3000);
+            $.ajax({
+                url: 'http://localhost:8080/api/post',
+                type: 'POST',
+                headers: {
+                    'Authorization': authCookie
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // 요청 성공 시 처리할 로직
+                    alert("등록성공");
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                }
+            });
             alert("야호");
             window.location.href = '/';
         }
