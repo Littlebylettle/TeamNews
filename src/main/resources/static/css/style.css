@@ -623,3 +623,42 @@ body2 {
     border: none;
     cursor: pointer;
 }
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.update {
+    /* position: absolute; */
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+    border: 0;
+    background-color: transparent;
+}
+.delete {
+    /* position: absolute; */
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #252525;
+    text-decoration: underline;
+    border: 0;
+    background-color: transparent;
+}
