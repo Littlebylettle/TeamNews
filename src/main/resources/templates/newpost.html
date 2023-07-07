@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -57,12 +56,15 @@
                 success: function(response) {
                     // 요청 성공 시 처리할 로직
                     alert("등록성공");
-                    window.location.href = '/';
+
+                    window.location.reload();
+
                 },
                 error: function(xhr, status, error) {
                 }
             });
             alert("야호");
+            window.location.href = '/';
         }
 
 
