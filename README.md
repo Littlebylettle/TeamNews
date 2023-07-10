@@ -60,18 +60,21 @@
 - 승철, 정은: 전반적인 html,css 업무 담당
 - 인서, 슬기, 정훈: js와 서버 연결 담당
 
-## 🔗 ERD 설계
 
-![텍스트](https://file.notion.so/f/s/3bacb15c-9bb8-4206-b208-299a89012e60/IMG_1592F2BD5984-1.jpeg?id=74c862cf-528e-42e0-b057-1155bb85a95f&table=block&spaceId=a45c4451-2602-41e2-b8d6-b9429e41af01&expirationTimestamp=1688781600000&signature=JzqpHiedua6_PZPRFAhfU053fdWM8u-EheLehTkXIvY&downloadName=IMG_1592F2BD5984-1.jpeg)
+## 🔗 ERD 설계
 
 
 ## 🎨 와이어프레임
 
-![텍스트](https://file.notion.so/f/s/c752fc4b-f5f9-4b3e-b592-0577cdc62659/Untitled.png?id=0d471dec-e7a1-4d26-b058-4fad8806cff7&table=block&spaceId=a45c4451-2602-41e2-b8d6-b9429e41af01&expirationTimestamp=1688781600000&signature=E_NE2G9pRolIsb_V69oAHLcvHSvN4sBYhISA556jdfI&downloadName=Untitled.png)
+
+## ⛏ API Table
+
+https://www.notion.so/4-Today-Outfit-1eee4e1fcefb4f2bad2a9ff31d5c2e42
 
 
 ## 💻 시연 영상
 [![이미지 텍스트](https://img.youtube.com/vi/zppCEXQvk04/0.jpg)](https://www.youtube.com/watch?v=zppCEXQvk04)
+
 
 
 ## ⏲ 프로젝트 진행 타임라인
